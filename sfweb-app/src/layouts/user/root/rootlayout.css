@@ -1,0 +1,18 @@
+.root-layout{
+    display: grid;
+    gap: 20px;
+    grid-template-areas: 
+    "navbar-container content rightbar";
+}
+
+.navbar-container{
+    grid-area: navbar-container;
+}
+
+.main-content{
+    grid-area: content;
+}
+
+.rightbar{
+    grid-area: rightbar;
+}

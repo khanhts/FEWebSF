@@ -1,0 +1,76 @@
+.navbar-container{
+    position:sticky;
+    top:0;
+    left: 0;
+    width: 110px;
+    height: 100vh;
+    background-image: linear-gradient(rgb(216,43,72), rgb(114,23,38));
+}
+
+.logo-container{
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 11.275px;
+    margin-bottom: 70px;;
+}
+
+.logo{
+    color: rgb(216,43,72);
+    margin: 0;
+    padding-top: 15px;
+}
+
+.nav-item{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+.quick-post-container{
+    width: 95px;
+    height: 45px;
+    background-color: white;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 25px;
+}
+
+.nav-item-line{
+    width: 70px;
+    height: 2px;
+    background-color: white;
+    margin: auto;
+}
+
+.bottom-nav-item{
+    display: flex;
+    margin: 25px 0px 0px 10px;
+}
+
+.profile-avatar{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.line{
+    width: 20px;
+    border: 2px solid white;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-container, .nav-item, .quick-post-container, .profile-avatar, .profile-option{
+    cursor: pointer;
+}

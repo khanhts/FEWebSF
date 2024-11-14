@@ -1,0 +1,57 @@
+.user-background, .brief-info, .functions{
+    margin: 0px 10px 2px;
+    border: 2px solid black;
+}
+
+.user-background{
+    height: 250px;
+ 
+}
+
+.user-avatar{
+    position: absolute;
+    top: 150px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 15px;
+    border: 1px solid black;
+}
+
+.brief-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.brief-info h2{
+    text-align: start;
+    color: black;
+    margin: 0;
+    padding-left: 15px;
+}
+
+.btn-account-upgrade{
+    width: 140px;
+    color: white;
+    background-color: deepskyblue;
+    margin-top: 20px;
+}
+
+.follower-container{
+    display: flex;
+}
+
+.follower-container p{
+    padding-left: 15px;
+    padding-bottom: 15px;
+    margin: 0;
+}
+
+.functions{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.functions a{
+    font-size: 2rem;
+}

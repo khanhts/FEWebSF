@@ -1,0 +1,66 @@
+/*-----General-----*/
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35rem;
+    min-height: 600px;
+    background-color: white;
+}
+/*-----Login-----*/
+
+.login-form, .signup-form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.signin-functions{
+    width: 70%;
+}
+
+label,h2,p{
+    color: black;
+    margin-bottom: 1rem;
+}
+
+input{
+    color: black;
+    background-color: white;
+    accent-color: rgb(216, 43, 72);
+    caret-color: rgb(216, 43, 72);
+    border-color: lightgray;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    height: 2rem;
+}
+
+.seperate-line{
+    width: 70%;
+    margin: 1em 0;
+    border: 1px solid black;
+}
+
+.btn-google-signin{
+    background-color: red;
+}
+
+.translate-activation{
+    display: flex;
+}
+
+.btn-switchform{
+    color: dodgerblue;
+    background-color: transparent;
+    border: 0;
+    border-color: transparent;
+}
+
+.btn-switchform:hover{
+    color: blue;
+}
+
+.btn-switchform:focus{
+    outline: none;
+}
