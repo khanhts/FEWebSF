@@ -8,15 +8,14 @@ const SigninForm = ({onButtonClicked}) => {
     const handleFormSubmit = async(e) =>
         {
             e.preventDefault();
-            // const user = {username, password};
-            // let res = await signIn(user.username.value, user.password.value)
-            // if(res && res.status==200)
-            // {
-            //     console.log("Sign in successfully");
-            //     navigate("/home");
-            // }
-            // console.log(res);
-            navigate('/home');
+            const user = {username, password};
+            let res = await signIn(user.username.value, user.password.value)
+            if(res && res.status==200)
+            {
+                console.log("Sign in successfully");
+                navigate("/root");
+            }
+            console.log(res);
         }
   return (
     <div className='form-container'>

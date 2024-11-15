@@ -28,7 +28,7 @@ const UserInfo = () => {
                 </div>
             </div>
             <div className="functions">
-                <NavLink to={"/profile"}>Posts</NavLink>
+                <NavLink to={""}>Posts</NavLink>
                 <NavLink to={"orders"}>Orders</NavLink>
                 <NavLink to={"restaurants"}>Restaurants</NavLink>
             </div>

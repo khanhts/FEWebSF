@@ -11,7 +11,7 @@ import App from '../../App'
 export const router = createBrowserRouter((
     createRoutesFromElements(
         <Route path='/' element={<App/>}>
-            <Route path='home' element={<RootLayout/>}>
+            <Route path='root' element={<RootLayout/>}>
                 <Route index element={<Home/>}/>
                 <Route path='profile' element={<Profile/>}>
                     <Route  index element={<UserPost/>}/>
