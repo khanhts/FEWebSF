@@ -3,15 +3,25 @@ import './navbar.css'
 import React from 'react'
 
 const Navbar = () => {
+  const handleMouseOver = (e) => {
+    console.log(e.target);
+  }
   return (
-    <div className="navbar-container"> 
+      <div className="navbar-container"> 
         <div className="logo-container">
             <h1 className='logo'>SF</h1>
         </div>
-        <div className="nav-item"><NavLink to={"/"}>H</NavLink></div>
-        <div className="nav-item"></div>
-        <div className="nav-item"></div>
-        <div className="nav-item"></div>
+        <div className="nav-item-container">
+          <div className="item-icon">
+            <div className="nav-item" onMouseOver={(e)=>handleMouseOver(e)}><img src='' alt=''></img></div>
+            <div className="nav-item"></div>
+            <div className="nav-item"></div>
+            <div className="nav-item" ></div>
+          </div>
+          <div className="item-name">
+            
+          </div>
+        </div>
         <div className="quick-post-container"></div>
         <div className="nav-item-line"></div>
         <div className='bottom-nav-item'>

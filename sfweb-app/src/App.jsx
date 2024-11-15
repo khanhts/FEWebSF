@@ -1,14 +1,11 @@
-import { RouterProvider } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom';
 import './App.css'
-import { router } from './services/router/router'
 
-function App() {
 
-  return (
-    <>
-      <RouterProvider router={router}></RouterProvider>
-    </>
-  )
+function App(){
+  return(
+    <Outlet/>
+  );
 }
 
 export default App

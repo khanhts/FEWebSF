@@ -5,16 +5,20 @@ import Profile from '../../layouts/user/profile/Profile'
 import Registration from '../../layouts/user/registration/Registration'
 import UserPost from '../../components/userinfo/userpost/UserPost'
 import UserOrder from '../../components/userinfo/userorder/UserOrder'
+import App from '../../App'
+
 
 export const router = createBrowserRouter((
     createRoutesFromElements(
-        <Route path='/' element={<RootLayout/>}>
-            <Route index element={<Home/>}/>
-            <Route path='profile' element={<Profile/>}>
-                <Route  index element={<UserPost/>}/>
-                <Route  path='orders' element={<UserOrder/>}/>
-            </Route>
-            <Route  path='registration' element={<Registration/>}/>
+        <Route path='/' element={<App/>}>
+            <Route path='home' element={<RootLayout/>}>
+                <Route index element={<Home/>}/>
+                <Route path='profile' element={<Profile/>}>
+                    <Route  index element={<UserPost/>}/>
+                    <Route  path='orders' element={<UserOrder/>}/>
+                </Route>
+            </Route>    
+            <Route path='registration' element={<Registration/>}/>
         </Route>
     )
 ))
