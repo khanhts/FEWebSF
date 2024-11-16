@@ -1,19 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 import './formstyle.css'
-import React from 'react'
+import React, { useState } from 'react'
 import { signIn } from '../../services/axios/AxiosAuthen';
 
 const SigninForm = ({onButtonClicked}) => {
     const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const handleFormSubmit = async(e) =>
         {
             e.preventDefault();
-            const user = {username, password};
-            let res = await signIn(user.username.value, user.password.value)
+            let res = await signIn(username, password)
             if(res && res.status==200)
             {
                 console.log("Sign in successfully");
-                navigate("/root");
+                navigate("/");
             }
             console.log(res);
         }
@@ -22,9 +23,9 @@ const SigninForm = ({onButtonClicked}) => {
             <h2>Sign in to your account</h2>
             <form className='login-form' onSubmit={handleFormSubmit}>
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" id="login-username" placeholder='Username'/>
+                <input type="text" name="username" id="login-username" placeholder='Username' onChange={(e)=>{setUsername(e.target.value)}}/>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="login-password" placeholder='Password'/>
+                <input type="password" name="password" id="login-password" placeholder='Password' onChange={(e)=>{setPassword(e.target.value)}}/>
                 <button type='submit'><span>Sign In</span></button>
             </form>
             <div className='seperate-line'></div>

@@ -12,7 +12,6 @@ const Navbar = () => {
     setNavHover('');
   }
   const handleNavItemClick = (e) => {
-    console.log(e.target.name)
     navigate(e.target.name=='home'?'':e.target.name);
   }
   return (
@@ -28,19 +27,19 @@ const Navbar = () => {
                     onMouseLeave={(e)=>handleMouseLeave(e)}>
               </img>
             </div>
-            <div className="nav-item">
+            <div className="nav-item" onClick={(e)=>handleNavItemClick(e)}>
             <img src='./img/notification-icon.png' alt='' name='notification' 
                     onMouseEnter={(e)=>handleMouseEnter(e)}
                     onMouseLeave={(e)=>handleMouseLeave(e)}>
               </img>
             </div>
-            <div className="nav-item">
-            <img src='./img/restaurant-icon.png' alt='' name='restaurant' 
+            <div className="nav-item" onClick={(e)=>handleNavItemClick(e)}>
+            <img src='./img/restaurant-icon.png' alt='' name='restaurantquery' 
                     onMouseEnter={(e)=>handleMouseEnter(e)}
                     onMouseLeave={(e)=>handleMouseLeave(e)}>
               </img>
             </div>
-            <div className="nav-item" >
+            <div className="nav-item" onClick={(e)=>handleNavItemClick(e)}>
             <img src='./img/downarrow-icon.png' alt='' name='more' 
                     onMouseEnter={(e)=>handleMouseEnter(e)}
                     onMouseLeave={(e)=>handleMouseLeave(e)}>
@@ -50,7 +49,7 @@ const Navbar = () => {
           <div className="item-name">
             <p className={navHover=='home'?'animated':'inanimated'}>Home</p>
             <p className={navHover=='notification'?'animated':'inanimated'}>Notification</p>
-            <p className={navHover=='restaurant'?'animated':'inanimated'}>Restaurant</p>
+            <p className={navHover=='restaurantquery'?'animated':'inanimated'}>Restaurant</p>
             <p className={navHover=='more'?'animated':'inanimated'}>More</p>
           </div>
         </div>
