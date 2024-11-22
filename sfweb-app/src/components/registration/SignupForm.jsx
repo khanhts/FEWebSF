@@ -92,9 +92,9 @@ const SignupForm = ({onButtonClicked}) => {
                     <option value="0">Female</option>
                 </select>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                <input type="password" name="password" id="password" autoComplete='false' onChange={(e)=>{setPassword(e.target.value)}}/>
                 <label htmlFor="confirm-password">Confirm password</label>
-                <input type="password" name="confirm-password" id="confirmpassword" onChange={(e)=>{setConfirmPassword(e.target.value)}} onBlur={(e)=>handleInputBlur(e.target)}/>
+                <input type="password" name="confirm-password" id="confirmpassword" autoComplete='false' onChange={(e)=>{setConfirmPassword(e.target.value)}} onBlur={(e)=>handleInputBlur(e.target)}/>
                 <button type='submit'><span>Sign Up</span></button>
             </form>
             <div className="translate-activation">

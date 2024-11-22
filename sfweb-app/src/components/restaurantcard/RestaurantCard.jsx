@@ -1,11 +1,11 @@
-import './restaurant.css'
+import './restaurantcard.css'
 
 import React from 'react'
 
-const Restaurant = () => {
+const RestaurantCard = () => {
   return (
     <div className='restaurant-container'>
-        <div className="restaurant-avatar">
+        <div className="card-image">
             <img src="" alt="" />
         </div>
         <div className="restaurant-info">
@@ -23,4 +23,4 @@ const Restaurant = () => {
   )
 }
 
-export default Restaurant
+export default RestaurantCard

@@ -1,8 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import './navbar.css'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../../redux/actions/userAction';
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const [navHover, setNavHover] = useState('');
   const navigate = useNavigate();
   const handleMouseEnter = (e) => {
@@ -13,6 +16,10 @@ const Navbar = () => {
   }
   const handleNavItemClick = (e) => {
     navigate(e.target.name=='home'?'':e.target.name);
+  }
+  const handleLogOutClicked = (e) => {
+    dispatch(userLogout());
+    navigate("/registration");
   }
   return (
       <div className="navbar-container"> 
@@ -34,7 +41,7 @@ const Navbar = () => {
               </img>
             </div>
             <div className="nav-item" onClick={(e)=>handleNavItemClick(e)}>
-            <img src='./img/restaurant-icon.png' alt='' name='restaurantquery' 
+            <img src='./img/restaurant-icon.png' alt='' name='search-restaurant' 
                     onMouseEnter={(e)=>handleMouseEnter(e)}
                     onMouseLeave={(e)=>handleMouseLeave(e)}>
               </img>
@@ -49,11 +56,11 @@ const Navbar = () => {
           <div className="item-name">
             <p className={navHover=='home'?'animated':'inanimated'}>Home</p>
             <p className={navHover=='notification'?'animated':'inanimated'}>Notification</p>
-            <p className={navHover=='restaurantquery'?'animated':'inanimated'}>Restaurant</p>
+            <p className={navHover=='search-restaurant'?'animated':'inanimated'}>Restaurant</p>
             <p className={navHover=='more'?'animated':'inanimated'}>More</p>
           </div>
         </div>
-        <div className="quick-post-container"><img src="./img/pencil-icon.png" alt="" /></div>
+        <div className="quick-post-container"><img name="post/create" src="./img/pencil-icon.png" alt="" onClick={(e)=>handleNavItemClick(e)}/></div>
         <div className="nav-item-line"></div>
         <div className='bottom-nav-item'>
             <div className="profile-avatar" onClick={(e)=>handleNavItemClick(e)}><img src='./img/avatar-1.png' alt='' name='profile'></img></div>
@@ -63,6 +70,7 @@ const Navbar = () => {
                 <div className="line"></div>
             </div>
         </div>
+        <button className='btn-logout' onClick={(e)=>handleLogOutClicked(e)}>Log out</button>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import UserInfo from '../../../components/userinfo/UserInfo'
 
-const Profile = () => {
+const ProfilePage = () => {
   return (
     <>
         <div className='main-content'>
@@ -12,4 +12,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default ProfilePage

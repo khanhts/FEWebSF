@@ -4,6 +4,12 @@
     border-radius: 10px;
     border: 1px solid black;
     margin: 20px 10px 0px;
+
+    transition: all 0.5s ease-in-out;
+}
+
+.post-container.spin{
+    transform: rotate(360deg);
 }
 
 .top-info{
@@ -30,11 +36,48 @@ ul{
     margin-left: 10px;
 }
 
+.pImg-container{
+    margin: 0px 15px 20px;
+}
+
+.post-img{
+    width: 25%;
+    height: 25%;
+}
+
 .user-info li{
     color: black;
 }
 
+.options-label{
+    margin-top: 5px;
+    margin-right: 5px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    transition: all 0.1s ease-in;
+}
+
+.options-label.active{
+    visibility: visible;
+    transform: translateX(-25%);
+    transform: rotate(360deg);
+}
+
 .option{
+    display: flex;
+}
+
+.options-label button{
+    padding: 0 5px;
+    margin: 0;
+    background-color: transparent;
+    border-radius: 0;
+    color: black;
+}
+
+.option-icon{
     display: flex;
     flex-direction: column;
     justify-content: space-between;

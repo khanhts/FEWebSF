@@ -1,4 +1,4 @@
-import { api } from '../api/api'
+import { api } from '../../redux/api/api'
 
 const signIn = (username, password) => {
   return api.post('/users/login', 
