@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import './createpost.css'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { IMG_BASE_URL } from '../../../../utils/const/UrlConst';
 import { customDateParse } from '../../../../utils/customDateParse';
 import { createPost } from '../../../../services/axios/AxiosPost';
 import { useLocation, useNavigate } from 'react-router-dom';
+import './editpost.css'
 
-export const EditPost = () => {
-    const location = useLocation()
+const EditPost = () => {
+    const dialogRef = useRef(null);
+    const location = useLocation();
     
     const account = useSelector((state)=>state.user.account);
-    
+    const post = location.state;
 
-    const [content, setContent] = useState('')
-    const [images, setImages] = useState([])
+    const [limit, setLimit] = useState(4-post.images.length);
+    const [content, setContent] = useState('');
+    const [deletedImg, setDeletedImg] = useState([]);
+    const [images, setImages] = useState([]);
+    const [isShown, setIsShown] = useState(false);
 
     const navigate = useNavigate()
 
-    const handleContentChange = (value) => {
-        setContent(value);
+
+    const handleKeyDown = (e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = `${e.target.scrollHeight}px`; 
+        // In case you have a limitation
+        // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
+        setContent(e.target.value);
     }
 
     const handleImagesUpload = (files) =>{
@@ -31,12 +40,27 @@ export const EditPost = () => {
         navigate('/')
     }
 
-    useEffect(()=>{
+    const handleDeleteClick = () =>{
+        setIsShown(true)
+    }
 
+    const handleNoClick = () =>{
+        setIsShown(false)
+    }
+
+    useEffect(()=>{
     },[images])
 
     return (
-        <div className='main-content'>
+        <>
+            <dialog className='img-delete-confirmation' ref={dialogRef}>
+                <p>Are you sure you want to delete this images?</p>
+                <div className="confirmation">
+                    <button className='btn-no' onClick={()=>handleNoClick()}>No</button>
+                    <button className='btn-yes'>Yes</button>    
+                </div>
+            </dialog>
+            <div className='main-content'>
             <div className="post-container">
                 <div className="top-info">
                     <div className="user-info">
@@ -46,18 +70,26 @@ export const EditPost = () => {
                             <li>{customDateParse(Date.now())}</li>
                         </ul>    
                     </div>
-                    <div className='option'>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
-                    </div>
                 </div>
                 <div className="create-form-container" >
                     <form onSubmit={async(e)=>handleCreateFormSubmit(e)}>
                         <textarea className='creat-post-content' name="content" placeholder='What are your thought?'
-                                    onChange={(e)=>{handleContentChange(e.target.value)}}></textarea>
+                                    onChange={(e)=>{handleKeyDown(e)}} defaultValue={post.description}></textarea>
+                        <div className="images-origin">
+                            {post.images.length>0? 
+                                post.images.map((image, index)=>
+                                <div key={index} className='imgprev-wrapper'>
+                                    <img className='img-upload' src={IMG_BASE_URL + image.url_image}/>
+                                    <button key={image.id} type='button' className='btn-remove-img' onClick={()=>dialogRef.current?.showModal()}>X</button>
+                                </div>
+                                            )
+                                :
+                                <></>
+                            }
+                        </div>
                         <input className='image-upload' type="file" multiple
                                 onChange={(e)=>{handleImagesUpload(e.target.files)}}/>
+                        <p>Upload Images:</p>
                         <div className="images-upload-preview">
                             {images.length>0? 
                                 images.map((image, index)=>
@@ -75,5 +107,8 @@ export const EditPost = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
+
+export default EditPost

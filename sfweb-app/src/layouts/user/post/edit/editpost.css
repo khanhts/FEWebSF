@@ -1,0 +1,79 @@
+.imgprev-wrapper{
+    display: inline;
+    position:  relative;
+    padding: 0;
+    margin: 0;
+    margin-right: 25px;
+}
+
+.images-origin{
+   margin-bottom: 15px;
+}
+
+
+.btn-remove-img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1rem;
+    height: 1rem;
+    font-size: x-small;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    z-index: 5;
+    transition: all 0.5s ease-in-out 2s;
+}
+
+.btn-remove-img.active{
+    opacity: 0;
+}
+
+@keyframes infinitespin {
+    from{
+        transform: rotate(0deg);
+    }
+
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+.img-upload.active{
+    animation: infinitespin 0.1s ease-in-out 0s 25 normal none;
+    opacity: 0;
+}
+
+.img-delete-confirmation{
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+}
+
+.confirmation{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.btn-yes, .btn-no{
+    padding: 0;
+    margin: 0;
+    width: 4rem;
+    height: 2rem;
+}
+
+.btn-yes{
+    background-color: darkgreen;
+}
+
+.btn-no{
+    background-color: red;
+}
+
+dialog::backdrop {
+    background-color: rgb(0, 0, 00.2);
+    opacity: 0.75;
+}

@@ -8,9 +8,7 @@
 .creat-post-content{
     color: black;
     width: 49rem;
-    height: 15rem;
     background-color: transparent;
-    overflow-x: none;
     resize: none;
     border: 0;
     padding: 5px 10px 5px;
@@ -24,6 +22,7 @@
 .create-form-buttons{
     display: flex;
     justify-content: end;
+    margin-bottom: 15px;
 }
 
 .create-form-buttons button{

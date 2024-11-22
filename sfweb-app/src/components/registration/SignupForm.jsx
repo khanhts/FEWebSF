@@ -7,7 +7,7 @@ const SignupForm = ({onButtonClicked}) => {
     const [fullname, setFullname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [gender, setGender] = useState(0);
+    const [gender, setGender] = useState(1);
     const [password, setPassword] = useState('');
     const [confirmpassword, setConfirmPassword] = useState('');
     const [error, setError] = useState(false);
@@ -57,22 +57,21 @@ const SignupForm = ({onButtonClicked}) => {
     const handleFormSubmit = async(e) =>
     {
         e.preventDefault();
-        // else{
-        //     let respond = await signUp(username, password, fullname, gender, email)
-        //     if(respond && respond.status==200)
-        //     { 
-        //         if(respond.data.code>=200 && respond.data.code<=300)
-        //         {
-        //             setError(false);
-        //             setMessages([]);
-        //             onButtonClicked();
-        //         }
-        //     }
-        //     else{
-        //         setError(true);
-        //         setMessages(...messages, respond.data.message);
-        //     }
-        // }
+        let respond = await signUp(username, password, fullname, gender, email)
+        if(respond && respond.status==200)
+        { 
+            if(respond.data.code>=200 && respond.data.code<=300)
+            {
+                setError(false);
+                setMessages([]);
+                onButtonClicked();
+            }
+        }
+        else{
+            setError(true);
+            setMessages(...messages, respond.data.message);
+        }
+        console.log(respond)
     }
   return (
     <div className='form-container'>
@@ -87,7 +86,7 @@ const SignupForm = ({onButtonClicked}) => {
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" id="email" onChange={(e)=>{setEmail(e.target.value)}} onBlur={(e)=>handleInputBlur(e.target)} required/>
                 <label htmlFor="gender">Gender</label>
-                <select name="gender" id="gender" onChange={(e)=>{setGender(e.target.value)}}>
+                <select name="gender" id="gender" onChange={(e)=>{setGender(parseInt(e.target.value))}}>
                     <option value="1">Male</option>
                     <option value="0">Female</option>
                 </select>

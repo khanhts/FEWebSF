@@ -21,7 +21,6 @@ const HomePage = () => {
         let response = await fetchPost(accId,page,2);
         if(response&&response.data.code>=200&&response.data.code<=300)
         {
-          console.log(response)
           if(response.data.data == null)
             setHasMore(false)
           else

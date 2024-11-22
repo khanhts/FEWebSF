@@ -15,8 +15,12 @@ const CreatePost = () => {
 
     const navigate = useNavigate()
 
-    const handleContentChange = (value) => {
-        setContent(value);
+    const handleKeyDown = (e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = `${e.target.scrollHeight}px`; 
+        // In case you have a limitation
+        // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
+        setContent(e.target.value);
     }
 
     const handleImagesUpload = (files) =>{
@@ -30,7 +34,7 @@ const CreatePost = () => {
     }
 
     useEffect(()=>{
-
+        console.log(images)
     },[images])
 
     return (
@@ -44,18 +48,14 @@ const CreatePost = () => {
                             <li>{customDateParse(Date.now())}</li>
                         </ul>    
                     </div>
-                    <div className='option'>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
-                    </div>
                 </div>
                 <div className="create-form-container" >
                     <form onSubmit={async(e)=>handleCreateFormSubmit(e)}>
                         <textarea className='creat-post-content' name="content" placeholder='What are your thought?'
-                                    onChange={(e)=>{handleContentChange(e.target.value)}}></textarea>
+                                    onChange={(e)=>{handleKeyDown(e)}}></textarea>
                         <input className='image-upload' type="file" multiple
                                 onChange={(e)=>{handleImagesUpload(e.target.files)}}/>
+                        <p>Upload Images:</p>
                         <div className="images-upload-preview">
                             {images.length>0? 
                                 images.map((image, index)=>

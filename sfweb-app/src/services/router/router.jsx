@@ -12,6 +12,8 @@ import ProfilePage from '../../layouts/user/profile/ProfilePage'
 import RestaurantPage from '../../layouts/user/restaurant/RestaurantPage'
 import QueryRestaurant from '../../layouts/user/queryrestaurant/QueryRestaurant'
 import CreatePost from '../../layouts/user/post/create/CreatePost'
+import EditPost from '../../layouts/user/post/edit/EditPost'
+
 
 
 
@@ -54,6 +56,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'create',
                         element: <CreatePost/>,
+                    },
+                    {
+                        path: 'edit',
+                        element: <EditPost/>,
                     }
                 ]
             }
