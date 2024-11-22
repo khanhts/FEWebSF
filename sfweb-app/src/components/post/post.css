@@ -1,3 +1,43 @@
+@keyframes spinlowerright {
+    from{
+        transform: translate3d(0,0,0) rotate(0deg);
+    }
+
+    to{
+        transform: translate3d(300px,500px,0) rotate(360deg);
+    }
+}
+
+@keyframes spintopright {
+    from{
+        transform: translate3d(300px,500px,0) rotate(0deg);
+    }
+
+    to{
+        transform: translate3d(300px,0,0) rotate(3600deg);
+    }
+}
+
+@keyframes spinlowerleft {
+    from{
+        transform: translate3d(300px,0,0) rotate(0deg);
+    }
+
+    to{
+        transform: translate3d(-300px,500px,0) rotate(360deg);
+    }
+}
+
+@keyframes endspind {
+    from{
+        transform: translate3d(-300px,500px,0) rotate(0deg);
+    }
+
+    to{
+        transform: translate3d(0,0,0) rotate(360deg);
+    }
+}
+
 .post-container{
     width: 52rem;
     background-color: white;
@@ -9,7 +49,10 @@
 }
 
 .post-container.spin{
-    transform: rotate(360deg);
+    animation:  spinlowerright 0.5s ease-in 0s 1 normal none, 
+                spintopright 0.5s ease-in-out 0.5s 1 normal none,
+                spinlowerleft 0.5s ease-in-out 1s 1 normal none,
+                endspin 0.5s ease-out 1.5s 1 normal none;
 }
 
 .top-info{
@@ -50,26 +93,30 @@ ul{
 }
 
 .options-label{
+    padding: 0;
     margin-top: 5px;
     margin-right: 5px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
-    visibility: hidden;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-10px);
     transition: all 0.1s ease-in;
 }
 
 .options-label.active{
-    visibility: visible;
-    transform: translateX(-25%);
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .option{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
 }
 
-.options-label button{
+.link-opt-name{
     padding: 0 5px;
     margin: 0;
     background-color: transparent;
@@ -87,6 +134,11 @@ ul{
     margin-top: 16px;
     margin-right: 10px;
     cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.option-icon.active{
+    transform: rotate(90deg);
 }
 
 .dot{

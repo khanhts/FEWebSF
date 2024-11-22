@@ -1,9 +1,10 @@
 import { IMG_BASE_URL } from '../../utils/const/UrlConst'
 import { customDateParse } from '../../utils/customDateParse'
+import { NavLink } from "react-router-dom";
 import './post.css'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-const Post = ({post}) => {
+const Post = ({post, isMyPost}) => {
 
         const [isShown, setIsShown] = useState(false);
         const [spin, setSpin] = useState(false) 
@@ -25,26 +26,33 @@ const Post = ({post}) => {
         }
 
         return (
-        <div className={spin? "post-container spin": "post-container"} onMouseEnter={()=>handlePostClicked()} onMouseLeave={()=>handleMouseOffPost()}>
-        {/* <div className="post-container"> */}
+        // <div className={spin? "post-container spin": "post-container"} 
+        //     onMouseEnter={()=>handlePostClicked()} 
+        //     onMouseLeave={()=>handleMouseOffPost()}>
+        <div className="post-container">
             <div className="top-info">
                 <div className="user-info">
                     <img src={IMG_BASE_URL + post.account.url_avatar} alt="N/A" />
                     <ul>
                         <li>{post.account.fullname}</li>
                         <li>{customDateParse(post.created_at)}</li>
-                    </ul>    
+                    </ul>  
                 </div>
                 <div className='option'>
-                    <div className={isShown? "options-label active":"options-label"}>
-                        <button className='btn-opt-name' onClick={(e)=>handleOptIconClicked(e.target)}>Edit</button>
-                        <button className='btn-opt-name'onClick={(e)=>handleOptIconClicked(e.target)}>Delete</button>
-                        <button className='btn-opt-name'onClick={(e)=>handleOptIconClicked(e.target)}>Report</button>
+                    <div className={isShown? 'option-icon active': 'option-icon'} onClick={(e)=>handleOptIconClicked(e.target)}>
+                        <div className='dot'></div>
+                        <div className='dot'></div>
+                        <div className='dot'></div>
                     </div>
-                    <div className='option-icon' onClick={(e)=>handleOptIconClicked(e.target)}>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
-                        <div className='dot'></div>
+                    <div className={isShown? "options-label active":"options-label"}>
+                        {isMyPost?
+                        <>
+                            <NavLink className='link-opt-name' to={{pathname: `/post/edit`}} state={post}>Edit</NavLink>
+                            <NavLink className='link-opt-name' >Delete</NavLink>
+                        </>
+                        :
+                        <></>}
+                        <NavLink className='link-opt-name' >Report</NavLink>
                     </div>
                 </div>
             </div>

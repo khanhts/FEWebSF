@@ -41,7 +41,7 @@ const HomePage = () => {
             hasMore={hasMore}
             endMessage={<p>You have seen it all</p>}>
                   {posts.map((post,index)=>
-                    (<Post key={post.id} post={post}/>)
+                    (post.account.id==accId? <Post key={index} post={post} isMyPost={true}/> : <Post key={index} post={post} isMyPost={false}/>)
                   )}
             </InfiniteScroll>
         </div>
