@@ -47,12 +47,6 @@
     opacity: 0;
 }
 
-.img-delete-confirmation{
-    background-color: white;
-    border: 1px solid black;
-    z-index: 100;
-}
-
 .confirmation{
     display: flex;
     justify-content: space-evenly;
@@ -71,6 +65,16 @@
 
 .btn-no{
     background-color: red;
+}
+
+.img-delete-confirmation{
+    background-color: white;
+    border: 1px solid black;
+    z-index: 100;
+}
+
+.img-delete-confirmation p{
+    margin-bottom: 10px;
 }
 
 dialog::backdrop {

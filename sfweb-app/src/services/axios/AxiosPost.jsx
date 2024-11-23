@@ -23,11 +23,37 @@ export const createPost = async(accId, content, lng, lat, files, token) => {
             headers: {
               "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
-            },}
-        )
+            },});
       } catch (error) {
         console.log(error);
       }
 }
 
+export const editPost = async(accId, postId, content, files, token) => {
+  const formData = new FormData();
+  formData.append("account_id", accId);
+  formData.append("description", content);
+  Array.from(files).forEach((file)=>{formData.append("images",file)})
+  try {
+      const response = await api.put(`/posts/${postId}`,formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },})
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+export const deleteImage = async(imgId, token) => {
+  try {
+      const response = await api.delete(`/posts/images/${imgId}`, 
+          { headers: {Authorization: `Bearer ${token}`}}
+          )
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
   
