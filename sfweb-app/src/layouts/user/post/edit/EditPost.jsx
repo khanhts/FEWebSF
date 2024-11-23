@@ -7,50 +7,49 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './editpost.css'
 
 const EditPost = () => {
+    const account = useSelector((state)=>state.user.account);
     const dialogRef = useRef(null);
     const location = useLocation();
     
-    const account = useSelector((state)=>state.user.account);
     const post = location.state;
-
-    const [limit, setLimit] = useState(4-post.images.length);
-    const [content, setContent] = useState(post.description);
-    // const [pendingDelete, setPendingDelete] = useState(0);
     let peddingImg = 0;
+
+    const [content, setContent] = useState(post.description);
     const [deletedImg, setDeletedImg] = useState([]);
     const [images, setImages] = useState([]);
-    const [isShown, setIsShown] = useState(false);
 
     const navigate = useNavigate()
 
 
     const handleKeyDown = (e) => {
         e.target.style.height = 'inherit';
-        e.target.style.height = `${e.target.scrollHeight}px`; 
-        // In case you have a limitation
-        // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
+        e.target.style.height = `${e.target.scrollHeight}px`;
         setContent(e.target.value);
     }
 
     const handleImagesUpload = (files) =>{
-        setImages([...images, ... files])
+        setImages([...files])
+    }
+
+    const handleCancleEdit = () => {
+        navigate('/');
     }
 
     const handleEditFormSubmit = async(e) => {
         e.preventDefault();
-        console.log("Start fetching ...")
+        // console.log("Start fetching ...")
         let response;
         if(deletedImg.length>0)
         {
             deletedImg.map(async(imgID)=>{
                 response = await deleteImage(imgID, account.accessToken)
-                console.log("Delete response: ", response)
+                // console.log("Delete response: ", response)
             })
         }
         if(content!==post.description||images.length>0)
         {
-             response = await editPost(account.userId, post.id,content,images,account.accessToken);
-            console.log("Update response: ",response)
+            response = await editPost(account.userId, post.id,content,images,account.accessToken);
+            // console.log("Update response: ",response)
         }
         navigate('/')
     }
@@ -122,7 +121,7 @@ const EditPost = () => {
                             }
                         </div>
                         <div className="create-form-buttons">
-                            <button type='button' className='btn-cancel'>Cancel</button>
+                            <button type='button' className='btn-cancel' onClick={()=>handleCancleEdit()}>Cancel</button>
                             <button type='submit' className='btn-post' disabled={content!==post.description?false:
                                                                         (images.length>0?false:
                                                                         (deletedImg.length>0? false: true))}>Post</button>

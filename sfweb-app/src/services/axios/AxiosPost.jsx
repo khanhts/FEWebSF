@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { api } from "../../redux/api/api";
 
 export const fetchPost = async (accId, page, pageSize) => {
@@ -52,6 +53,19 @@ export const deleteImage = async(imgId, token) => {
           { headers: {Authorization: `Bearer ${token}`}}
           )
       return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+export const deletePost = async(postId, token) => {
+  try {
+      const response = await api.post(`/posts/soft-delete/${postId}`,{},
+        {headers:{
+          Authorization: `Bearer ${token}`
+        }}
+          )
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

@@ -18,13 +18,15 @@ const CreatePost = () => {
     const handleKeyDown = (e) => {
         e.target.style.height = 'inherit';
         e.target.style.height = `${e.target.scrollHeight}px`; 
-        // In case you have a limitation
-        // e.target.style.height = `${Math.min(e.target.scrollHeight, limit)}px`;
         setContent(e.target.value);
     }
 
     const handleImagesUpload = (files) =>{
-        setImages([...images, ... files])
+        setImages([... files])
+    }
+
+    const handleCancleEdit = () => {
+        navigate('/');
     }
 
     const handleCreateFormSubmit = async(e) => {
@@ -34,7 +36,6 @@ const CreatePost = () => {
     }
 
     useEffect(()=>{
-        console.log(images)
     },[images])
 
     return (
@@ -66,7 +67,7 @@ const CreatePost = () => {
                             }
                         </div>
                         <div className="create-form-buttons">
-                            <button className='btn-cancel'>Cancel</button>
+                            <button type='button' className='btn-cancel' onClick={()=>handleCancleEdit()}>Cancel</button>
                             <button type='submit' className='btn-post'>Post</button>
                         </div>
                     </form>

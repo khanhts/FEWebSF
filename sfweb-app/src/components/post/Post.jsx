@@ -1,13 +1,19 @@
 import { IMG_BASE_URL } from '../../utils/const/UrlConst'
 import { customDateParse } from '../../utils/customDateParse'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './post.css'
 import React, { useState } from 'react'
+import { useRef } from 'react';
+import { deletePost } from '../../services/axios/AxiosPost';
+import { useSelector } from 'react-redux';
 
 const Post = ({post, isMyPost}) => {
+        const dialogRef = useRef(null);
+        const token = useSelector((state)=>state.user.account.accessToken);
 
         const [isShown, setIsShown] = useState(false);
-        const [spin, setSpin] = useState(false) 
+        const [spin, setSpin] = useState(false)
+        const [dltPost, setDltPost] = useState(0);
 
         const handleOptIconClicked = (e) => {
             if(isShown)
@@ -25,10 +31,31 @@ const Post = ({post, isMyPost}) => {
             setSpin(false)
         }
 
+        const handleDeleteClick = (value) => {
+            setDltPost(value);
+            dialogRef.current?.showModal();
+        }
+
+        const handleConfirmDeletePost = async() =>{
+            console.log("token: ", token);
+            console.log("Start fetching ...");
+            await deletePost(dltPost, token);
+            dialogRef.current?.close();
+            window.location.reload();
+        }
+
         return (
-        // <div className={spin? "post-container spin": "post-container"} 
-        //     onMouseEnter={()=>handlePostClicked()} 
-        //     onMouseLeave={()=>handleMouseOffPost()}>
+        <>
+        <dialog className='img-delete-confirmation' ref={dialogRef}>
+                <p>Are you sure you want to delete this post?</p>
+                <div className="confirmation">
+                    <button className='btn-no' onClick={()=>dialogRef.current?.close()}>No</button>
+                    <button className='btn-yes' onClick={async()=>handleConfirmDeletePost()}>Yes</button>    
+                </div>
+        </dialog>
+         {/* <div className={spin? "post-container spin": "post-container"} 
+             onMouseEnter={()=>handlePostClicked()} 
+             onMouseLeave={()=>handleMouseOffPost()}> */}
         <div className="post-container">
             <div className="top-info">
                 <div className="user-info">
@@ -48,11 +75,11 @@ const Post = ({post, isMyPost}) => {
                         {isMyPost?
                         <>
                             <NavLink className='link-opt-name' to={{pathname: `/post/edit`}} state={post}>Edit</NavLink>
-                            <NavLink className='link-opt-name' >Delete</NavLink>
+                            <button data-key={post.id} className='btn-opt-name' onClick={(e)=>handleDeleteClick(e.target.getAttribute("data-key"))}>Delete</button>
                         </>
                         :
                         <></>}
-                        <NavLink className='link-opt-name' >Report</NavLink>
+                        <button className='btn-opt-name' >Report</button>
                     </div>
                 </div>
             </div>
@@ -67,6 +94,7 @@ const Post = ({post, isMyPost}) => {
                 <button className="btn-comment">{post.total_like} Comments</button>
             </div>
         </div>
+        </>
         )
 }
 
