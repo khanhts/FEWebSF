@@ -9,11 +9,16 @@ import { useSelector } from 'react-redux';
 
 const Post = ({post, isMyPost}) => {
         const dialogRef = useRef(null);
+        const navigate = useNavigate();
         const token = useSelector((state)=>state.user.account.accessToken);
 
         const [isShown, setIsShown] = useState(false);
         const [spin, setSpin] = useState(false)
         const [dltPost, setDltPost] = useState(0);
+
+        const handlePostClicked = () => {
+            navigate('/post/detail', {state: {post,isMyPost}})
+        }
 
         const handleOptIconClicked = (e) => {
             if(isShown)
@@ -22,7 +27,7 @@ const Post = ({post, isMyPost}) => {
                 setIsShown(true)
         }
 
-        const handlePostClicked = () => {
+        const handlePostHover = () => {
             if(!spin)
                 setSpin(true)
         }
@@ -37,8 +42,6 @@ const Post = ({post, isMyPost}) => {
         }
 
         const handleConfirmDeletePost = async() =>{
-            console.log("token: ", token);
-            console.log("Start fetching ...");
             await deletePost(dltPost, token);
             dialogRef.current?.close();
             window.location.reload();
@@ -54,9 +57,9 @@ const Post = ({post, isMyPost}) => {
                 </div>
         </dialog>
          {/* <div className={spin? "post-container spin": "post-container"} 
-             onMouseEnter={()=>handlePostClicked()} 
+             onMouseEnter={()=>handlePostHover()} 
              onMouseLeave={()=>handleMouseOffPost()}> */}
-        <div className="post-container">
+        <div className="post-container" onClick={()=>handlePostClicked()}>
             <div className="top-info">
                 <div className="user-info">
                     <img src={IMG_BASE_URL + post.account.url_avatar} alt="N/A" />
@@ -86,7 +89,14 @@ const Post = ({post, isMyPost}) => {
             <div className="content">
                 <p>{post.description}</p>
                 <div className="pImg-container">
-                    {post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)}
+                    { Object.hasOwn(post, "images")?
+                    post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)
+                    :
+                    Object.hasOwn(post, "image")?
+                    <image src={IMG_BASE_URL + post.image.url_image}/>
+                    :
+                    <></>
+                    }
                 </div>
             </div>
             <div className="like-comment">

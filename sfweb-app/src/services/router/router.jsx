@@ -13,6 +13,7 @@ import RestaurantPage from '../../layouts/user/restaurant/RestaurantPage'
 import QueryRestaurant from '../../layouts/user/queryrestaurant/QueryRestaurant'
 import CreatePost from '../../layouts/user/post/create/CreatePost'
 import EditPost from '../../layouts/user/post/edit/EditPost'
+import DetailPost from '../../layouts/user/post/detail/DetailPost'
 
 
 
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'edit',
                         element: <EditPost/>,
+                    },
+                    {
+                        path: 'detail',
+                        element: <DetailPost/>
                     }
                 ]
             }

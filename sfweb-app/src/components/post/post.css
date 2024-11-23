@@ -48,6 +48,10 @@
     transition: all 0.5s ease-in-out;
 }
 
+.post-container:hover{
+    cursor: pointer;
+}
+
 .post-container.spin{
     animation:  spinlowerright 0.5s ease-in 0s 1 normal none, 
                 spintopright 0.5s ease-in-out 0.5s 1 normal none,

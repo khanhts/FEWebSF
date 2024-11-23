@@ -4,14 +4,7 @@ import Post from '../../post/Post'
 const UserPost = () => {
   return (
     <>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
-        <Post/>
+
     </>
   )
 }

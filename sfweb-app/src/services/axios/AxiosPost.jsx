@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { api } from "../../redux/api/api";
 
 export const fetchPost = async (accId, page, pageSize) => {

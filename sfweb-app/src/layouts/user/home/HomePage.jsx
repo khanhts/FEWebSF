@@ -11,8 +11,9 @@ import InfiniteScroll from '../../../components/infinitescroll/InfiniteScroll'
 
 const HomePage = () => {
     const accId = useSelector((state)=>state.user.account.userId);
-    const [page, setPage] = useState(1);
+    
     const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true)
 
 

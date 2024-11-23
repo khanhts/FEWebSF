@@ -1,0 +1,24 @@
+.page-title{
+    display: flex;
+}
+
+.btn-goback{
+    margin: 0;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    background-color: transparent;
+    color: black;
+}
+
+.title-label{
+    padding-top: 10px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.comment-section h3{
+    margin-left: 10px;
+}

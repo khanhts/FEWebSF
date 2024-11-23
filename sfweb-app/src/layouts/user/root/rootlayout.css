@@ -11,6 +11,7 @@
 
 .main-content{
     grid-area: content;
+    width: 853.6px;
 }
 
 .rightbar{
