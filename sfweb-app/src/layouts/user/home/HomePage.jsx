@@ -34,7 +34,7 @@ const HomePage = () => {
     return (
     <>
         <div className='main-content'>
-            <h2 className='home-title'>New feed</h2>
+            <h2 className='home-title'>New feed</h2> 
             <InfiniteScroll 
             loader={<p>loading...</p>}
             fetchMore={() => setPage((prev) => prev + 1)}

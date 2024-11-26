@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { deletePost } from '../../../../services/axios/AxiosPost';
 import { IMG_BASE_URL } from '../../../../utils/const/UrlConst';
 import { customDateParse } from '../../../../utils/customDateParse';
@@ -23,6 +23,9 @@ const DetailPost = () => {
     const [comments, setComment] = useState([])
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true)
+    const [content, setContent] = useState('')
+    const [image, setImage] = useState([])
+
 
     const handleGoBackClicked = () => {
         navigate('/');
@@ -33,6 +36,16 @@ const DetailPost = () => {
             setIsShown(false)
         else
             setIsShown(true)
+    }
+
+    const handleKeyDown = (e) => {
+        e.target.style.height = 'inherit';
+        e.target.style.height = `${e.target.scrollHeight}px`; 
+        setContent(e.target.value);
+    }
+
+    const handleImageUpload = (file) => {
+        setImage(file)
     }
 
     const handleDeleteClick = (value) => {
@@ -108,7 +121,15 @@ const DetailPost = () => {
                 <div className="content">
                     <p>{post.description}</p>
                     <div className="pImg-container">
-                        {post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)}
+                        {/* {post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)} */}
+                        { Object.hasOwn(post, "images")?
+                    post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)
+                    :
+                    Object.hasOwn(post, "image")?
+                    <image src={IMG_BASE_URL + post.image.url_image}/>
+                    :
+                    <></>
+                    }
                     </div>
                 </div>
                 <div className="like-comment">
@@ -118,6 +139,16 @@ const DetailPost = () => {
             </div>
             <div className="comment-section">
                 <h3>Comment:</h3>
+                <form className='comment-form'>
+                    <textarea className='creat-post-content' name="content" placeholder='What are your thought?'
+                                        onChange={(e)=>{handleKeyDown(e)}}></textarea>
+                    <div className="comment-form-option">
+                        <label className='lbl-imgUp' htmlFor='imageUpload'><img src='../img/imgUp-icon.png'/></label>
+                        <button type='submit' className='btn-comment-submit'><img src="../img/post-icon.png"/></button>
+                    </div>
+                    <input id='imageUpload' className='image-upload' type="file" 
+                            onChange={(e)=>{handleImageUpload(e.target.files)}}/>
+                </form>
                 <InfiniteScroll 
                 loader={<p>loading...</p>}
                 fetchMore={() => setPage((prev) => prev + 1)}

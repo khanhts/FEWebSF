@@ -15,9 +15,11 @@ const Post = ({post, isMyPost}) => {
         const [isShown, setIsShown] = useState(false);
         const [spin, setSpin] = useState(false)
         const [dltPost, setDltPost] = useState(0);
+        const [postFocus, setPostFocus] = useState(true);
 
         const handlePostClicked = () => {
-            navigate('/post/detail', {state: {post,isMyPost}})
+            if(postFocus)
+                navigate('/post/detail', {state: {post,isMyPost}})
         }
 
         const handleOptIconClicked = (e) => {
@@ -34,6 +36,14 @@ const Post = ({post, isMyPost}) => {
 
         const handleMouseOffPost = () => {
             setSpin(false)
+        }
+
+        const handleMouseOver = () => {
+            setPostFocus(false);
+        }
+
+        const handleMouseLeave = () => {
+            setPostFocus(true);
         }
 
         const handleDeleteClick = (value) => {
@@ -68,8 +78,9 @@ const Post = ({post, isMyPost}) => {
                         <li>{customDateParse(post.created_at)}</li>
                     </ul>  
                 </div>
-                <div className='option'>
-                    <div className={isShown? 'option-icon active': 'option-icon'} onClick={(e)=>handleOptIconClicked(e.target)}>
+                <div className='option' onMouseEnter={()=>handleMouseOver()} onMouseLeave={()=>handleMouseLeave()}>
+                    <div className={isShown? 'option-icon active': 'option-icon'} 
+                    onClick={(e)=>handleOptIconClicked(e.target)}>
                         <div className='dot'></div>
                         <div className='dot'></div>
                         <div className='dot'></div>
@@ -93,15 +104,18 @@ const Post = ({post, isMyPost}) => {
                     post.images.map((image, index)=><img key={index} className='post-img' src={IMG_BASE_URL+image.url_image} alt=''/>)
                     :
                     Object.hasOwn(post, "image")?
-                    <image src={IMG_BASE_URL + post.image.url_image}/>
+                    post.image.url_image!==''?
+                    <img src={IMG_BASE_URL + post.image.url_image}/>:<></>
                     :
                     <></>
                     }
                 </div>
             </div>
             <div className="like-comment">
-                <button className='btn-like'>{post.total_comment} Like</button>
-                <button className="btn-comment">{post.total_like} Comments</button>
+                <button className='btn-like'
+                onMouseEnter={()=>handleMouseOver()}
+                onMouseLeave={()=>handleMouseLeave()}>{post.total_like} Like</button>
+                <button className="btn-comment">{post.total_comment} Comments</button>
             </div>
         </div>
         </>

@@ -19,6 +19,41 @@
     text-align: center;
 }
 
-.comment-section h3{
+.comment-section>h3, .comment-form{
     margin-left: 10px;
 }
+
+.comment-form{
+    width: 52rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.comment-form-option{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 24px;
+}
+
+.image-upload{
+    display: none;
+}
+
+.lbl-imgUp{
+    padding: 0;
+    margin: 0;
+}
+
+.lbl-imgUp:hover{
+    cursor: pointer;
+}
+
+.btn-comment-submit{
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+

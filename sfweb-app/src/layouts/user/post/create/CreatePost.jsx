@@ -40,7 +40,7 @@ const CreatePost = () => {
 
     return (
         <div className='main-content'>
-            <div className="post-container">
+            <div className="create-post-container">
                 <div className="top-info">
                     <div className="user-info">
                         <img src={IMG_BASE_URL + account.avatar} alt="N/A" />
@@ -51,12 +51,9 @@ const CreatePost = () => {
                     </div>
                 </div>
                 <div className="create-form-container" >
-                    <form onSubmit={async(e)=>handleCreateFormSubmit(e)}>
+                    <form className='post-form' onSubmit={async(e)=>handleCreateFormSubmit(e)}>
                         <textarea className='creat-post-content' name="content" placeholder='What are your thought?'
                                     onChange={(e)=>{handleKeyDown(e)}}></textarea>
-                        <input className='image-upload' type="file" multiple
-                                onChange={(e)=>{handleImagesUpload(e.target.files)}}/>
-                        <p>Upload Images:</p>
                         <div className="images-upload-preview">
                             {images.length>0? 
                                 images.map((image, index)=>
@@ -66,6 +63,10 @@ const CreatePost = () => {
                                 <></>
                             }
                         </div>
+                        <label className='lbl-imgUp' htmlFor='imageUpload'><img src='../img/imgUp-icon.png'/></label>
+                        <input id='imageUpload' className='image-upload' type="file" multiple
+                            onChange={(e)=>{handleImagesUpload(e.target.files)}}/>
+                        
                         <div className="create-form-buttons">
                             <button type='button' className='btn-cancel' onClick={()=>handleCancleEdit()}>Cancel</button>
                             <button type='submit' className='btn-post'>Post</button>

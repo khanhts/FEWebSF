@@ -1,3 +1,11 @@
+.create-post-container{
+    width: 52rem;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 20px 10px 0px;
+}
+
 .create-form-container{
     display: flex;
     flex-direction: column;
@@ -5,13 +13,27 @@
     margin-left: 15px;
 }
 
+.post-form{
+    display: flex;
+    flex-direction: column;
+}
+
 .creat-post-content{
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 0;
+    font-size: 1rem;
     color: black;
     width: 49rem;
     background-color: transparent;
     resize: none;
     border: 0;
-    padding: 5px 10px 5px;
+}
+
+.creat-post-content:focus{
+    border: none;
+    outline: none;
 }
 
 .img-upload{

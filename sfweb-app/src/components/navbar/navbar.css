@@ -56,6 +56,11 @@
     position: absolute;
     left: 100%;
     padding-top: 15px;
+    visibility: hidden;
+}
+
+.item-name.appear{
+    visibility: visible;
 }
 
 .item-name p{
@@ -69,7 +74,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-p.animated{
+.item-name>p.animated{
     opacity: 1;
     transform: translateX(3px);
 }
