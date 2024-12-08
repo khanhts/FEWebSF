@@ -20,7 +20,7 @@
     border: 1px solid black;
 }
 
-.restaurant-info-wrapper h2, p, .rating-container{
+.restaurant-info-wrapper>h2, .open-time, .rating-container{
     margin: 0;
     padding: 0;
     padding-left: 1.5rem;

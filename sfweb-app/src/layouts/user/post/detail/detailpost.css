@@ -40,6 +40,12 @@
     display: none;
 }
 
+.comment-prev-img{
+    margin: 0 0 15px 24px;
+    width: 25%;
+    height: 25%;
+}
+
 .lbl-imgUp{
     padding: 0;
     margin: 0;

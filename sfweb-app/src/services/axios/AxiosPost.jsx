@@ -2,7 +2,7 @@ import { api } from "../../redux/api/api";
 
 export const fetchPost = async (accId, page, pageSize) => {
     try {
-      const response = await api.get(`/posts?account_id=${accId}&page=${page}&page_size=${pageSize}`)
+      const response = await api.get(`/posts?account_id=${accId}&page=${page}&page_size=${pageSize}`,{})
       return response
     } catch (error) {
       console.log(error);
@@ -21,9 +21,9 @@ export const createPost = async(accId, content, lng, lat, files, token) => {
     try {
         const response = await api.post(`/posts`,formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
+              Authorization: token,
             },});
+            return response;
       } catch (error) {
         console.log(error);
       }
@@ -68,5 +68,18 @@ export const deletePost = async(postId, token) => {
     } catch (error) {
       console.log(error);
     }
+}
+
+export const fetchProfilePosts = async(from_id, to_id, page, pageSize, token) => {
+  try {
+    const response = await api.get(`/posts/person?from_id=${from_id}&to_id=${to_id}&page=${page}&page_size=${pageSize}`,{
+      headers:{
+        Authorization: token
+      }
+    });
+    return response;
+  } catch (error) {
+    console.log("Can't fetch this user's posts!");
+  }
 }
   

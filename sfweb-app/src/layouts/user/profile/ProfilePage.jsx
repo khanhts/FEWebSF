@@ -1,7 +1,7 @@
 import React from 'react'
 import UserInfo from '../../../components/userinfo/UserInfo'
-
 const ProfilePage = () => {
+  
   return (
     <>
         <div className='main-content'>

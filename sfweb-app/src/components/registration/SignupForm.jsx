@@ -57,10 +57,10 @@ const SignupForm = ({onButtonClicked}) => {
     const handleFormSubmit = async(e) =>
     {
         e.preventDefault();
-        let respond = await signUp(username, password, fullname, gender, email)
-        if(respond && respond.status==200)
+        let response = await signUp(username, password, fullname, gender, email)
+        if(response && response.status==200)
         { 
-            if(respond.data.code>=200 && respond.data.code<=300)
+            if(response.data.code>=200 && response.data.code<=300)
             {
                 setError(false);
                 setMessages([]);
@@ -69,9 +69,9 @@ const SignupForm = ({onButtonClicked}) => {
         }
         else{
             setError(true);
-            setMessages(...messages, respond.data.message);
+            setMessages(...messages, response.data.message);
         }
-        console.log(respond)
+        console.log(response)
     }
   return (
     <div className='form-container'>

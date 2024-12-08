@@ -17,6 +17,8 @@
 }
 
 .signin-functions{
+    display: flex;
+    flex-direction: column;
     width: 70%;
 }
 
@@ -38,9 +40,8 @@ select{
 
 input{
     background-color: white;
-    accent-color: rgb(216, 43, 72);
-    caret-color: rgb(216, 43, 72);
-    border-color: lightgray;
+    accent-color: rgb(216, 83, 43);
+    caret-color: rgb(216, 83, 43);
     font-size: 1rem;
     height: 2rem;
 }
@@ -49,6 +50,10 @@ input{
     width: 70%;
     margin: 1em 0;
     border: 1px solid black;
+}
+
+.login-form>button{
+    background-color: black;
 }
 
 .btn-google-signin{

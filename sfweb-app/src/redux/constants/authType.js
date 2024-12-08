@@ -1,0 +1,11 @@
+export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
+export const REFRESH_TOKEN_FAIL = "REFRESH_TOKEN_FAIL";
+
+export const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
+export const SET_REFRESH_TOKEN = "SET_REFRESH_TOKEN";
+
+export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
+export const SIGN_IN_FAIL = "SIGN_IN_FAIL";
+
+export const LOG_OUT = "LOG_OUT";
+

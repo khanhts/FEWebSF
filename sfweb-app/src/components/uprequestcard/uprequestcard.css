@@ -1,0 +1,41 @@
+.request-card-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+    padding: 0.5rem ;
+    width: 40rem;
+    height: 4rem;
+    border: 1px solid blue;
+    border-radius: 13px;
+}
+
+.request-card-header{
+    display: flex;
+    align-items: center;
+}
+
+.applicator-info{
+    display: flex;
+    align-items: center;
+    margin: 0 0.5rem;
+}
+
+.applicator-info>img{
+    width: auto;
+    height: 3rem;
+}
+
+.resquest-card-actions{
+    display: flex;
+    justify-content: space-between;
+    width: 12rem;
+}
+
+.btn-reject-request{
+    background-color: red;
+}
+
+.btn-accept-request{
+    background-color: green;
+}

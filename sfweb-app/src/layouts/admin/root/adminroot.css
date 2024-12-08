@@ -1,0 +1,12 @@
+.admin-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+}
+
+.admin-avatar{
+    width: auto;
+    height: 4rem;
+    border-radius: 50%;
+}

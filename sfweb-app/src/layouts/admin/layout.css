@@ -1,0 +1,38 @@
+/* .body-container,.left-body,.middle-body{
+    border: 1px solid black;
+} */
+
+.body-container{
+    display: flex;
+    padding: 0.75rem 0.5rem;
+    margin-top: 1rem;
+}
+
+.left-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: 10rem;
+    padding: 0.75rem 0.5rem;
+}
+
+.left-body>button{
+    margin: 0.5rem 0;
+    padding: 0;
+    background-color: transparent;
+    color: blue;
+    outline: none;
+    border: none;
+}
+
+.middle-body{
+    display: flex;
+    padding: 0.5rem;
+}
+
+.list-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}

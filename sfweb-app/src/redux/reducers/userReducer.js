@@ -1,34 +1,32 @@
-import { FETCH_USER_LOGIN_SUCCESS, GET_ME, USER_LOGOUT } from "../actions/userAction";
+import { FETCH_USER_LOGIN_FAIL, FETCH_USER_LOGIN_SUCCESS, } from "../actions/userAction";
+import { LOG_OUT } from "../constants/authType";
 
 
 
 const INITIAL_STATE = {
-  account: {
-    accessToken: "",
-    refreshToken: "",
-    userId: 0,
-    fullname: '',
-    avatar: ''
-  },
+  accounts: [],
+  email: "",
   isAuthenticated: false,
 };
 const userReducer = (state = INITIAL_STATE, action) =>{
     switch (action.type) {
         case FETCH_USER_LOGIN_SUCCESS:
-          console.log("Action: ", action);
           return {
-            ...state, account:{
-                accessToken: action.payload.data.access_token,
-                refreshToken: action.payload.data.refresh_token,
-                userId: action.payload.data.userID,
-                fullname: action.payload.data.userFullname,
-                avatar: action.payload.data.userAvatar
-            },
+            ...state, 
+            accounts: action.payload.accounts,
+            email: action.payload.email,
             isAuthenticated: true,
           }
-        case USER_LOGOUT:
+        case FETCH_USER_LOGIN_FAIL:
+          return {
+            ...state, 
+            accounts: [],
+            email: "",
+            isAuthenticated: false,
+          }
+        case LOG_OUT:
           return{
-            ...INITIAL_STATE,
+            INITIAL_STATE,
           }
         default:
           return state

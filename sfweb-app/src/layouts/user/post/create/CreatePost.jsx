@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux'
 import { IMG_BASE_URL } from '../../../../utils/const/UrlConst';
 import { customDateParse } from '../../../../utils/customDateParse';
 import { createPost } from '../../../../services/axios/AxiosPost';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
-    const account = useSelector((state)=>state.user.account);
-    
+    const location = useLocation();
+    const myAcc = location.state.myAcc;
+    const accessToken =  location.state.accessToken;
 
     const [content, setContent] = useState('')
     const [images, setImages] = useState([])
@@ -31,8 +32,10 @@ const CreatePost = () => {
 
     const handleCreateFormSubmit = async(e) => {
         e.preventDefault();
-        let response = await createPost(account.userId,content,null,null,images,account.accessToken);
-        navigate('/')
+        let response = await createPost(myAcc.id,content,null,null,images,accessToken);
+        if(response&&response.data.code>=200&&response.data.code<=300)
+            navigate('/')
+        console.log(response)
     }
 
     useEffect(()=>{
@@ -43,9 +46,9 @@ const CreatePost = () => {
             <div className="create-post-container">
                 <div className="top-info">
                     <div className="user-info">
-                        <img src={IMG_BASE_URL + account.avatar} alt="N/A" />
+                        <img src={IMG_BASE_URL + myAcc.url_avatar} alt="N/A" />
                         <ul>
-                            <li>{account.fullname}</li>
+                            <li>{myAcc.fullname}</li>
                             <li>{customDateParse(Date.now())}</li>
                         </ul>    
                     </div>

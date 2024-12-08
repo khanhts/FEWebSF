@@ -1,28 +1,22 @@
-import { Outlet, redirect, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, redirect, useNavigate } from 'react-router-dom'
 import Navbar from '../../../components/navbar/Navbar'
 import { useDispatch, useSelector } from 'react-redux';
 import './rootlayout.css'
 
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { fetchMe } from '../../../services/axios/AxiosUser';
-import { getMe } from '../../../redux/actions/userAction';
+import { fetchUserAction } from '../../../redux/actions/userAction';
+
 
 const RootLayout = () => {
-    const isAuthenticated = useSelector((state)=>state.user.isAuthenticated);
-    const token = useSelector((state)=>state.user.account.accessToken);
+    const auth = useSelector((state)=>state.auth);
 
-    const navigate = useNavigate();
-
-    useEffect(()=>{
-        if(!isAuthenticated)
-            navigate("/registration");
-    },[])
-
-    return (
+    return auth.accessToken!=null?(
         <div className="root-layout">
-            {isAuthenticated? <Navbar/>: <></>}
+            <Navbar/>
             <Outlet/>    
         </div>
+    ):(
+        <Navigate to="/registration"/>
     );
 }
 

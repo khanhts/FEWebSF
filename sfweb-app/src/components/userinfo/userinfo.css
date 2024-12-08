@@ -1,21 +1,28 @@
-.user-background, .brief-info, .functions{
+.brief-info, .functions{
     margin: 0px 10px 2px;
     border: 2px solid black;
 }
 
+.user-profile-image{
+    position: relative;
+    display: flex;
+    margin: 0px 10px 2px;
+}
+
 .user-background{
-    height: 250px;
- 
+    width: 100%;
+    height: 25rem;
+    z-index: -1;
 }
 
 .user-avatar{
     position: absolute;
-    top: 150px;
-    width: 80px;
-    height: 80px;
+    top: 65%;
+    left: 2%;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
-    margin-left: 15px;
-    border: 1px solid black;
+    z-index: -1;
 }
 
 .brief-info{
@@ -30,6 +37,18 @@
     padding-left: 15px;
 }
 
+.account_actions>button{
+    margin: 20px;
+}
+
+.btn-denied-friend{
+    background-color: lightcoral;
+}
+
+.btn-accept-friend{
+    background-color: green;
+}
+
 .btn-account-upgrade{
     width: 140px;
     color: white;
@@ -41,10 +60,14 @@
     display: flex;
 }
 
-.follower-container p{
-    padding-left: 15px;
-    padding-bottom: 15px;
-    margin: 0;
+.follower-container>p{
+    padding: 0;
+    margin: 10px;
+}
+
+.follower-container>p:hover{
+    color: orange;
+    cursor: pointer;
 }
 
 .functions{

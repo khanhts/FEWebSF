@@ -1,0 +1,128 @@
+.modal-container, .modal-upgrade-container{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.808);
+}
+
+.modal-box, .modal-upgrade-box{
+    width: 24rem;
+    height: 400px;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+@keyframes modalSlideDown {
+    from{
+        bottom: 100%;
+    }
+    to{
+        bottom:0
+    }
+}
+
+.modal-upgrade-container{
+   animation: modalSlideDown 0.5s ease-out 0s 1 normal none;
+}
+
+.modal-upgrade-box{
+    width: 35rem;
+    height: 35rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-header{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.modal-subheader{
+    font-size: 0.875rem;
+    color: gray;
+}
+
+.modal-content-wrapper{
+    height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.account-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-container{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; 
+}
+
+.avatar-image{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.account-fullname{
+    font-size: 0.875rem;
+    color: gray;
+}
+
+.btn-remove-follow{
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: crimson;
+}
+
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+}
+
+.form-group>button{
+    width: fit-content;
+}
+
+.btn-remove{
+    padding: 0;
+    font-size: 2rem;
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    outline: none;
+    color: red;
+    background-color: transparent;
+}
+
+.btn-add-selection{
+    padding: 0;
+    color: gray;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.create-price-proceed{
+    background-color: green;
+}
