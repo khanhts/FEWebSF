@@ -5,15 +5,19 @@ import './adminroot.css'
 import { IMG_BASE_URL } from '../../../utils/const/UrlConst'
 import NavDropDown from '../../../components/navdropdown/NavDropDown'
 import { logOutAction } from '../../../redux/actions/adminAction'
+import { AuthProvider, useAuth } from '../../../services/auth/AuthProvider'
 
 const AdminRoot = () => {
     const admin = useSelector((state)=>state.admin);
+    
+    const {setTokenADM} = useAuth();
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleAdminLogOut = () => {
         dispatch(logOutAction());
+        setTokenADM(null);
         navigate("/admin/signin");
     };
 
@@ -22,18 +26,15 @@ const AdminRoot = () => {
         {(admin.role==="ADMIN"||admin.role==="MODERATOR")?
             <>                
                 <nav className='admin-nav'>
-                    <NavDropDown title="Home" token={admin.access_token}/>
+                    <NavDropDown title="Home"/>
                     <NavDropDown title="Moderator" 
-                                 links={["Logs"]}
-                                 token={admin.access_token}/>
+                                 links={["Logs"]}/>
                     <NavDropDown title="Application" 
-                                 links={["Account upgrade", "Report"]}
-                                 token={admin.access_token}/>
-                    <NavDropDown title="Price" token={admin.access_token}/>
+                                 links={["Account upgrade", "Report"]}/>
+                    <NavDropDown title="Price"/>
                     <NavDropDown title={null}
                                  avatar={IMG_BASE_URL+admin.avatar}
-                                 items={(<button onClick={()=>handleAdminLogOut()}>Logout</button>)}
-                                 token={admin.access_token}/>
+                                 items={(<button onClick={()=>handleAdminLogOut()}>Logout</button>)}/>
                 </nav>
                 <Outlet/>
             </>

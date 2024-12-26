@@ -1,12 +1,8 @@
 import { admin_api, api } from "../../redux/api/api";
 
-export const fetchAllPrice = async(token,page=1) => {
+export const fetchAllPrice = async(page=1) => {
     try{
-        const response = await admin_api.get(`/price?page=${page}&page_size=5`,{
-            headers:{
-                Authorization: token
-            }
-        })
+        const response = await admin_api.get(`/price?page=${page}&page_size=5`)
         console.log("Fetch price response: ", response);
         
         return response.data
@@ -15,13 +11,9 @@ export const fetchAllPrice = async(token,page=1) => {
     }
 }
 
-export const fetchUpgradePlans = async(token) => {
+export const fetchUpgradePlans = async() => {
     try{
-        const response = await api.get("/accounts/upgrade-price",{
-            headers:{
-                Authorization: token
-            }
-        })
+        const response = await api.get("/accounts/upgrade-price")
         console.log("Fetch upgrade plans: ", response);
         
         return response.data
@@ -30,13 +22,9 @@ export const fetchUpgradePlans = async(token) => {
     }
 }
 
-export const createPriceTag = async(formData,token) => {
+export const createPriceTag = async(formData) => {
     try{
-        const response = await admin_api.post("/price",formData,{
-            headers:{
-                Authorization: token
-            }
-        })
+        const response = await admin_api.post("/price",formData)
         console.log("Create price response: ", response);
         
         return 0;

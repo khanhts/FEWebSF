@@ -7,8 +7,9 @@ import { useRef } from 'react';
 import { deletePost } from '../../services/axios/AxiosPost';
 import { useSelector } from 'react-redux';
 import { createReact, deleteReact, updateReact } from '../../services/axios/AxiosReact';
+import ModalIssue from '../modals/issues/ModalIssue';
 
-const Post = ({post, isMyPost, myAcc, accessToken}) => {
+const Post = ({post, isMyPost, myAcc}) => {
         const dialogRef = useRef(null);
         const navigate = useNavigate();
 
@@ -21,10 +22,11 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
         const [reactIcon, setReactIcon] = useState('');
         const [reactState, setReactState] = useState(0);
         const [reactCount, setReactCount] = useState(0);
+        const [isOpenReport, setIsOpenReport] = useState(false);
 
         const handlePostClicked = () => {
             if(postFocus)
-                navigate('/post/detail', {state: {post,isMyPost,myAcc,accessToken}})
+                navigate('/post/detail', {state: {post,isMyPost,myAcc}})
         }
 
         const handleOptIconClicked = (e) => {
@@ -91,14 +93,10 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
         }
 
         const handleReactClicked = async(value) => {
-            console.log("Processing ...");
-            console.log("Current state: ", reactState);
-            console.log("New state: ", value);
             let response;
             if(value==reactState&&reactState!=0)
             {
-                console.log("Deleting ...")
-                response = await deleteReact(myAcc.id,post.id,accessToken);
+                response = await deleteReact(myAcc.id,post.id);
                 if(response.data.code>=200&&response.data.code<=300)
                 {
                     renderReactionIcon(0);
@@ -111,20 +109,17 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
                 {
                     value=1;
                 }
-                console.log("Creating ...")
-                response = await createReact(myAcc.id,post.id,value,accessToken);
+                response = await createReact(myAcc.id,post.id,value);
                 if(response.data.code>=200&&response.data.code<=300){
                     renderReactionIcon(value);
                     setReactCount(reactCount+1);
                 }
             }
             else{
-                console.log("Updating ...");
-                response = await updateReact(myAcc.id,post.id,value,accessToken)
+                response = await updateReact(myAcc.id,post.id,value)
                 if(response.data.code>=200&&response.data.code<=300)
                     renderReactionIcon(value);
             }
-            console.log("Finish: ", response)
         }
 
         const handleDeleteClick = (value) => {
@@ -133,9 +128,16 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
         }
 
         const handleConfirmDeletePost = async() =>{
-            await deletePost(dltPost, accessToken);
+            await deletePost(dltPost);
             dialogRef.current?.close();
             window.location.reload();
+        }
+        const openReportModal = () => {
+            setIsOpenReport(true);
+        }
+
+        const closeReportModal = () => {
+            setIsOpenReport(false);
         }
 
         useEffect(()=>{
@@ -155,6 +157,7 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
                     <button className='btn-yes' onClick={async()=>handleConfirmDeletePost()}>Yes</button>    
                 </div>
         </dialog>
+        {isOpenReport && <ModalIssue closeModal={closeReportModal} postId={post.id} accountId={myAcc.id}/>}
          {/* <div className={spin? "post-container spin": "post-container"} 
              onMouseEnter={()=>handlePostHover()} 
              onMouseLeave={()=>handleMouseOffPost()}> */}
@@ -162,10 +165,10 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
             <div className="top-info">
                 <div className="user-info">
                     <img src={IMG_BASE_URL + post.account.url_avatar} alt="N/A" />
-                    <ul>
-                        <li onMouseEnter={()=>handleMouseOver()} onMouseLeave={()=>handleMouseLeave()}><NavLink to={`profile/${post.account.id}`} state={{myAcc: myAcc, accessToken: accessToken}}>{post.account.fullname}</NavLink></li>
-                        <li>{customDateParse(post.created_at)}</li>
-                    </ul>  
+                    <div className='info-text'>
+                        <p onMouseEnter={()=>handleMouseOver()} onMouseLeave={()=>handleMouseLeave()}><NavLink to={`/profile/${post.account.id}`} state={{myAcc: myAcc}}>{post.account.fullname}</NavLink></p>
+                        <p>{customDateParse(post.created_at)}</p>
+                    </div>  
                 </div>
                 <div className='option' onMouseEnter={()=>handleMouseOver()} onMouseLeave={()=>handleMouseLeave()}>
                     <div className={isShown? 'option-icon active': 'option-icon'} 
@@ -174,16 +177,18 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
                         <div className='dot'></div>
                         <div className='dot'></div>
                     </div>
-                    <div className={isShown? "options-label active":"options-label"}>
+                    {isShown&&
+                    <div className={"options-label"}>
                         {isMyPost?
                         <>
-                            <NavLink className='link-opt-name' to={{pathname: `/post/edit`}} state={{post,myAcc,accessToken}}>Edit</NavLink>
+                            <NavLink className='link-opt-name' to={{pathname: `/post/edit`}} state={{post,myAcc}}>Edit</NavLink>
                             <button data-key={post.id} className='btn-opt-name' onClick={(e)=>handleDeleteClick(e.target.getAttribute("data-key"))}>Delete</button>
                         </>
                         :
-                        <></>}
-                        <button className='btn-opt-name' >Report</button>
-                    </div>
+                        <>
+                            <button className='btn-opt-name' onClick={()=>openReportModal()}>Report</button>
+                        </>}
+                    </div>}
                 </div>
             </div>
             <div className="content">
@@ -207,11 +212,11 @@ const Post = ({post, isMyPost, myAcc, accessToken}) => {
             {post.post_type_id!=9?
             <div className="like-comment">
                 <div className={showed?"emotes-container showed":"emotes-container"} onMouseEnter={(e)=>showEmotesContainer(e)} onMouseLeave={(e)=>closeEmotesContainer(e)}>
-                    <img react-state={1} src="../img/thumb-up-icon.png" alt="N/A"  onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
-                    <img react-state={2} src="../img/fire-emoji.png" alt="N/A"  onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
-                    <img react-state={3} src="../img/laugh-emoji.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
-                    <img react-state={4} src="../img/sad-face-emoji.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
-                    <img react-state={5} src="../img/dislike-icon.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
+                    <img react-state={1} src="/img/thumb-up-icon.png" alt="N/A"  onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
+                    <img react-state={2} src="/img/fire-emoji.png" alt="N/A"  onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
+                    <img react-state={3} src="/img/laugh-emoji.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
+                    <img react-state={4} src="/img/sad-face-emoji.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
+                    <img react-state={5} src="/img/dislike-icon.png" alt="N/A" onClick={(e)=>handleReactClicked(parseInt(e.target.getAttribute('react-state')))}/>
                 </div>
                 <button react-state={reactState} className={'btn-like'}
                 onMouseEnter={(e)=>showEmotesContainer(e)}

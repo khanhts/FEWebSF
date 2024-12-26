@@ -9,10 +9,9 @@ import './editpost.css'
 const EditPost = () => {
     const dialogRef = useRef(null);
     const location = useLocation();
-    
+
     const post = location.state.post;
     const myAcc = location.state.myAcc;
-    const accessToken = location.state.accessToken;
 
     let peddingImg = 0;
 
@@ -44,13 +43,13 @@ const EditPost = () => {
         if(deletedImg.length>0)
         {
             deletedImg.map(async(imgID)=>{
-                response = await deleteImage(imgID, accessToken)
+                response = await deleteImage(imgID)
                 // console.log("Delete response: ", response)
             })
         }
         if(content!==post.description||images.length>0)
         {
-            response = await editPost(myAcc.id, post.id,content,images,accessToken);
+            response = await editPost(myAcc.id, post.id,content,images);
             // console.log("Update response: ",response)
         }
         navigate('/')

@@ -10,8 +10,7 @@ import { fetchPost } from '../../../services/axios/AxiosPost'
 import InfiniteScroll from '../../../components/infinitescroll/InfiniteScroll'
 
 const HomePage = () => {
-    const myAcc = useSelector((state)=>state.user.accounts);
-    const accessToken = useSelector((state)=>state.auth.accessToken);
+    const myAcc = useSelector((state)=>state.currentAcc.data);
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
@@ -19,7 +18,7 @@ const HomePage = () => {
 
     useLayoutEffect(()=>{
       const getAllPosts = async() =>{
-        let response = await fetchPost(myAcc[0].id,page,2);
+        let response = await fetchPost(myAcc.id,page,10);
         if(response&&response.data.code>=200&&response.data.code<=300)
         {
           if(response.data.data == null)
@@ -41,13 +40,13 @@ const HomePage = () => {
             hasMore={hasMore}
             endMessage={<p>You have seen it all</p>}>
                   {posts.map((post)=>
-                    (post.account.id==myAcc[0].id? <Post key={post.id} post={post} isMyPost={true} myAcc={myAcc[0]} accessToken={accessToken}/> : <Post key={post.id} post={post} isMyPost={false} myAcc={myAcc[0]} accessToken={accessToken}/>)
+                    (post.account.id==myAcc.id? <Post key={post.id} post={post} isMyPost={true} myAcc={myAcc}/> : <Post key={post.id} post={post} isMyPost={false} myAcc={myAcc}/>)
                   )}
             </InfiniteScroll>
         </div>
         <div className="rightbar">
           <div className="rightbar-wrapper">
-            <Searchbar myAcc={myAcc[0]} accessToken={accessToken}/>
+            <Searchbar myAcc={myAcc}/>
             {/* <Ads/>
             <Sidebar/>  
             <Quickview/>    */}

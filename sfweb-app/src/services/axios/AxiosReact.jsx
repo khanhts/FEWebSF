@@ -1,15 +1,13 @@
 import { api } from "../../redux/api/api";
 
-export const createReact = async (account_id, post_id, state, token) => {
+//DONE
+
+export const createReact = async (account_id, post_id, state) => {
     try {
         const response = await api.post(`/react`, {
             account_id: account_id,
             post_id: post_id,
             state: state,
-        },{
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
         });
         return response;
     } catch (error) {
@@ -17,12 +15,9 @@ export const createReact = async (account_id, post_id, state, token) => {
     }
 }
 
-export const deleteReact = async (account_id, post_id, token) => {
+export const deleteReact = async (account_id, post_id) => {
     try {
         const response = await api.delete(`/react`,{
-            headers:{
-                Authorization: token
-            },
             data:{
                 account_id: account_id,
                 post_id: post_id
@@ -34,16 +29,12 @@ export const deleteReact = async (account_id, post_id, token) => {
     }
 }
 
-export const updateReact = async (account_id, post_id, state, token) => {
+export const updateReact = async (account_id, post_id, state) => {
     try {
         const response = await api.put(`/react`, {
             account_id: account_id,
             post_id: post_id,
             state: state,
-        },{
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
         });
         return response;
     } catch (error) {

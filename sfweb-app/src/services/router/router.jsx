@@ -1,5 +1,4 @@
 import {createBrowserRouter} from 'react-router-dom'
-import RootLayout from '../../layouts/user/root/RootLayout'
 
 
 import Registration from '../../layouts/user/registration/Registration'
@@ -23,6 +22,13 @@ import ForgotPassword from '../../pages/forgot_password/ForgotPassword'
 import AccountUpgrade from '../../layouts/admin/accountupgrade/AccountUpgrade'
 import PriceManagement from '../../layouts/admin/upgradeprice/PriceManagement'
 import ReportManagement from '../../layouts/admin/report/ReportManagement'
+import ResetPassword from '../../pages/reset_password/ResetPassword'
+import NotificationPage from '../../layouts/user/notification/NotificationPage'
+import UserRestaurant from '../../components/userinfo/userrestaurant/UserRestaurant'
+import UserFriend from '../../components/userinfo/userfriend/UserFriend'
+import RootLayout from '../../layouts/user/root/RootLayout'
+import RestaurantCreate from '../../layouts/user/restaurant/create/RestaurantCreate'
+
 
 
 const protectedRoutes = [
@@ -31,7 +37,11 @@ const protectedRoutes = [
         element: <HomePage/>,
     },
     {
-        path: 'profile/:accountID',
+        path: 'notification',
+        element: <NotificationPage/>
+    },
+    {
+        path: 'profile/:accountID/',
         element: <ProfilePage/>,
         children: [
             {
@@ -42,7 +52,19 @@ const protectedRoutes = [
                 path: 'orders',
                 element: <UserOrder/>,
             },
+            {
+                path: 'restaurants',
+                element: <UserRestaurant/>
+            },
+            {
+                path: 'friend',
+                element: <UserFriend/>
+            }
         ],
+    },
+    {
+        path: 'create-restaurant/:accountID',
+        element: <RestaurantCreate/>
     },
     {
         path: 'search-restaurant',
@@ -53,7 +75,7 @@ const protectedRoutes = [
         element: <RestaurantPage/>,
     },
     {
-        path: 'user/search/:query',
+        path: 'search/users',
         element: <SearchedUser/>
     },
     {
@@ -124,5 +146,9 @@ export const router = createBrowserRouter([
     {
         path:'/forgot-password',
         element: <ForgotPassword/>
+    },
+    {
+        path:'/reset-password',
+        element: <ResetPassword/>
     }
 ]);

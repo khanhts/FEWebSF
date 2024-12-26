@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom';
 import { createPriceTag } from '../../../services/axios/AxiosPrice';
 
-const ModalCUPrice = ({closeModal, handleMouseHover, handleMouseLeave, context, token}) => {
+const ModalCUPrice = ({closeModal, handleMouseHover, handleMouseLeave, context}) => {
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
@@ -38,7 +38,7 @@ const ModalCUPrice = ({closeModal, handleMouseHover, handleMouseLeave, context, 
       benefit: benefits
     }
 
-    const response = createPriceTag(formData, token)
+    const response = createPriceTag(formData)
   }
 
   return (

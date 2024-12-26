@@ -2,6 +2,21 @@
     margin: 0px 10px 2px;
     border: 2px solid black;
 }
+.info-wrapper{
+    padding: 0.25rem 0;
+}
+
+.info-context{
+    display: flex;
+    width: auto;
+}
+
+.info-context>h2{
+    text-align: start;
+    color: black;
+    padding-left: 15px;
+    margin: 0 1rem 0 0;
+}
 
 .user-profile-image{
     position: relative;
@@ -28,13 +43,6 @@
 .brief-info{
     display: flex;
     justify-content: space-between;
-}
-
-.brief-info h2{
-    text-align: start;
-    color: black;
-    margin: 0;
-    padding-left: 15px;
 }
 
 .account_actions>button{

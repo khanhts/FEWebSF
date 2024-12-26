@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { deletePost } from '../../../../services/axios/AxiosPost';
 import { IMG_BASE_URL } from '../../../../utils/const/UrlConst';
@@ -14,7 +14,6 @@ const DetailPost = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const myAcc = location.state.myAcc;
-    const accessToken = location.state.accessToken;
     const post = location.state.post;
     const isMyPost = location.state.isMyPost;
 
@@ -42,7 +41,7 @@ const DetailPost = () => {
     const handleCommentFormSubmit = async(e) => {
         e.preventDefault();
         console.log("Creating comment ...");
-        let response = await createComment(post.id,content, myAcc.id, image, accessToken);
+        let response = await createComment(post.id,content, myAcc.id, image);
         if(response&&response.data.code>=200&&response.data.code<=300)
         {
             setContent('');
@@ -51,9 +50,9 @@ const DetailPost = () => {
         }
     }
 
-    useLayoutEffect(()=>{
+    useEffect(()=>{
     const getAllComments = async() =>{
-        let response = await fetchComments(post.id,page,5,accessToken);
+        let response = await fetchComments(post.id,page,5);
         console.log(response);
         if(response&&response.data.code>=200&&response.data.code<=300)
         {
@@ -102,9 +101,9 @@ const DetailPost = () => {
                 endMessage={<p>You have seen it all</p>}>
                     {comments.map((comment)=>
                         (comment.account_id==myAcc.id? 
-                            <Comment key={comment.id} comment={comment} isMyComment={true} myAcc={myAcc} accessToken={accessToken}/> 
+                            <Comment key={comment.id} comment={comment} isMyComment={true} myAcc={myAcc}/> 
                             : 
-                            <Comment key={comment.id} comment={comment} isMyComment={false} myAcc={myAcc} accessToken={accessToken}/>)
+                            <Comment key={comment.id} comment={comment} isMyComment={false} myAcc={myAcc}/>)
                     )}
                 </InfiniteScroll>
             </div>

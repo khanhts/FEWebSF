@@ -44,12 +44,7 @@
     border-radius: 10px;
     border: 1px solid black;
     margin: 20px 10px 0px;
-
     transition: all 0.5s ease-in-out;
-}
-
-.post-container:hover{
-    cursor: pointer;
 }
 
 .post-container.spin{
@@ -61,6 +56,7 @@
 
 .top-info{
     display: flex;
+    margin: 1rem 1rem 0;
     justify-content: space-between;
 }
 
@@ -71,6 +67,11 @@ ul{
 
 .user-info{
     display: flex;
+    justify-content: center;
+}
+
+.info-text{
+    margin-left: 0.5rem;
 }
 
 .user-info img{
@@ -79,12 +80,10 @@ ul{
     height: 50px;
     border: 2px solid black;
     border-radius: 50%;
-    margin-top: 15px;
-    margin-left: 10px;
 }
 
 .pImg-container{
-    margin: 0px 15px 20px;
+    margin-top: 1rem;
     columns: 2 204.25px;
 }
 
@@ -94,7 +93,6 @@ ul{
 
 .post-img{
     display: block;
-    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -116,31 +114,35 @@ ul{
     color: black;
 }
 
+@keyframes slideIn {
+    from{
+        transform: translateY(-10px); 
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
 .options-label{
     padding: 0;
-    margin-right: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.1s ease-in;
-}
-
-.options-label.active{
-    visibility: visible;
-    transform: translateY(0);
+    animation: slideIn 0.1s ease-in-out;
 }
 
 .option{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 10px;
+    width: 4rem;
+    height: 6rem;
+    text-align: center;
 }
 
 .link-opt-name, .btn-opt-name{
-    padding: 0 5px;
+    text-align: center;
+    padding: 0;
     margin: 0;
     background-color: transparent;
     color: black;
@@ -165,10 +167,7 @@ ul{
     justify-content: space-between;
     align-items: center;
     background-color: transparent;
-    width: 5px;
-    height: 20px;
-    margin-top: 16px;
-    margin-right: 5px;
+    padding: 0.25rem;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
@@ -178,14 +177,22 @@ ul{
 }
 
 .dot{
-    width: 5px;
-    height: 5px;
+    width: 0.25rem;
+    height: 0.25rem;
+    margin: 0.125rem 0;
     background-color: black;
     border-radius: 50%;
 }
 
-.content p{
-    margin: 20px 10px 20px;
+.content{
+    margin: 0 1rem 1rem;
+    padding: 1rem;
+}
+
+.content>p{
+    padding: 1rem;
+    border: 1px solid lightgray;
+    border-radius: 3px;
 }
 
 .like-comment{

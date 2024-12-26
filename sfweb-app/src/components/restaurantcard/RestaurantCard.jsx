@@ -12,11 +12,11 @@ const RestaurantCard = () => {
             <h2 className="restaurant-name">Restaurant's Name</h2>
             <p className="restaurant-distant">0.2km</p>
             <div className="rating-container">
-                <img src='./img/fillstar-icon.png' alt="" />
-                <img src="./img/fillstar-icon.png" alt="" />
-                <img src="./img/unfillstar-icon.png" alt="" />
-                <img src="./img/unfillstar-icon.png" alt="" />
-                <img src="./img/unfillstar-icon.png" alt="" />
+                <img src='/img/fillstar-icon.png' alt="" />
+                <img src="/img/fillstar-icon.png" alt="" />
+                <img src="/img/unfillstar-icon.png" alt="" />
+                <img src="/img/unfillstar-icon.png" alt="" />
+                <img src="/img/unfillstar-icon.png" alt="" />
             </div>
         </div>
     </div>

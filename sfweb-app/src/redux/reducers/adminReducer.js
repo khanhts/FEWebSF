@@ -27,6 +27,16 @@ export const adminReducer = (state=INITIAL_STATE, action) => {
             return{
                 INITIAL_STATE
             };
+        case types.SET_ADMIN_ACCESSTOKEN:
+            return{
+                ...state,
+                access_token: action.payload
+            }
+        case types.SET_ADMIN_REFRESHTOKEN:
+            return{
+                ...state,
+                refresh_token: action.payload
+            }
         default:
             return state
     }

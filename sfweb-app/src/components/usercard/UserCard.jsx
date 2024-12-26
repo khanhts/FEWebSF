@@ -3,12 +3,12 @@ import { IMG_BASE_URL } from '../../utils/const/UrlConst'
 import './usercard.css'
 import { useNavigate } from 'react-router-dom'
 
-const UserCard = ({account, myAcc, accessToken}) => {
+const UserCard = ({account, myAcc}) => {
 
     const navigate = useNavigate()
 
     const handleCardClick = () => {
-        navigate(`/profile/${account.id}`, {state:{myAcc,accessToken}})
+        navigate(`/profile/${account.id}`, {state:{myAcc}})
     }
 
     return (
@@ -19,6 +19,7 @@ const UserCard = ({account, myAcc, accessToken}) => {
                         <img src={IMG_BASE_URL+account.url_avatar} alt="" />
                     </div>
                     <p>{account.fullname}</p>
+                    {account.role_id==2 && <img src='../img/verified-acc-icon.png' alt='verified-acc'/>}
                 </div>
                 <div className="account-card-action">
                     <button className='btn-follow'>+</button>

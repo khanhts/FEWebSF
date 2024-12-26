@@ -8,6 +8,10 @@
     margin-bottom: 1rem;
 }
 
+.account-card-container:hover{
+    cursor: pointer;
+}
+
 .account-card-wrapper{
     width: 100%;
     display: flex;

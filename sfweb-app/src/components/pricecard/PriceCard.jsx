@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './pricecard.css'
 import { createUpgradeRequest } from '../../services/axios/AxiosUpgrade'
 import { fetchUpgradePlans } from '../../services/axios/AxiosPrice'
-const PriceCard = ({myAcc, token}) => {
+const PriceCard = ({myAcc}) => {
 
   const [pricePlan, setPricePlan] = useState({
     title: "",
@@ -11,12 +11,12 @@ const PriceCard = ({myAcc, token}) => {
   });
 
   const initPricePlan = async() => {
-    const response = await fetchUpgradePlans(token);
+    const response = await fetchUpgradePlans();
     setPricePlan(response.data)
   }
 
   const handleCreateAccountClicked = async() => {
-    const response = await createUpgradeRequest(myAcc.id, token);
+    const response = await createUpgradeRequest(myAcc.id);
   }
 
   useEffect(()=>{

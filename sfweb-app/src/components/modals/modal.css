@@ -20,6 +20,14 @@
     gap: 1.75rem;
 }
 
+.modal-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+}
+
 @keyframes modalSlideDown {
     from{
         bottom: 100%;
@@ -29,8 +37,38 @@
     }
 }
 
-.modal-upgrade-container{
-   animation: modalSlideDown 0.5s ease-out 0s 1 normal none;
+.modal-profile-box{
+    width: 25rem;
+    height: 35rem;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.modal-profile-box>.modal-content-wrapper{
+    height: auto;
+}
+
+.gender-checkbox-container{
+    display: flex;
+}
+
+.gender-checkbox{
+    display: flex;
+    align-items: center;
+    margin: 0 0.25rem;
+}
+
+.gender-checkbox>label{
+    margin: 0;
+}
+
+.gender-checkbox>input{
+    margin: 0 0.5rem;
 }
 
 .modal-upgrade-box{
@@ -43,6 +81,7 @@
 .modal-header{
     font-size: 1.25rem;
     font-weight: bold;
+    text-align: center;
 }
 
 .modal-subheader{
@@ -56,6 +95,19 @@
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
+}
+
+.account-card, .left-card{
+    display: flex;
+}
+
+.account-card{
+    width: 100%;
+    justify-content: space-between;
+}
+
+.left-card{
+    align-items: center;
 }
 
 .account-container{
@@ -126,3 +178,70 @@
 .create-price-proceed{
     background-color: green;
 }
+
+.issue-context-group{
+    display: flex;
+    align-items: center;
+}
+
+.issue-context-group>label{
+    font-size: 1.15rem;
+}
+
+.issue-context-group>input{
+    margin-right: 0.5rem;
+}
+
+.modal-action{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.modal-action>button{
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+}
+
+.btn-submit{
+    background-color: green;
+}
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.right-card{
+    border-radius: 3px;
+    padding: 0.2rem;
+}
+
+.right-card:hover{
+    background-image: conic-gradient(from var(--angle),red, orange, lime, blue, purple);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
+
+.btn-sign-in-account, .btn-sign-out{
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+}
+
+.btn-sign-in-account{
+    background-color: white;
+    color: black;
+    border: 0;
+    outline: 0;
+}
+
+

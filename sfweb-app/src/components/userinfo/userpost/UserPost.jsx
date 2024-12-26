@@ -9,14 +9,13 @@ const UserPost = () => {
   const location = useLocation();
   const params = useParams();
   const myAcc = location.state.myAcc;
-  const accessToken = location.state.accessToken;
 
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
   const getUserPosts = async() =>{
-    let response = await fetchProfilePosts(myAcc.id, parseInt(params.accountID), page, 5, accessToken)
+    let response = await fetchProfilePosts(myAcc.id, parseInt(params.accountID), page, 5)
     if(response.data.code>=200&&response.data.code<=300)
     {
       if(response.data.data == null)
@@ -31,6 +30,11 @@ const UserPost = () => {
   }
 
   useEffect(()=>{
+    setPosts([]);
+    setPage(1)
+  },[params.accountID])
+
+  useEffect(()=>{
     getUserPosts();
   },[page]);
 
@@ -42,7 +46,7 @@ const UserPost = () => {
             hasMore={hasMore}
             endMessage={<p>You have seen it all</p>}>
                   {posts.map((post)=>
-                    (post.account.id==myAcc.id? <Post key={post.id} post={post} isMyPost={true} myAcc={myAcc} accessToken={accessToken}/> : <Post key={post.id} post={post} isMyPost={false} myAcc={myAcc} accessToken={accessToken}/>)
+                    (post.account.id==myAcc.id? <Post key={post.id} post={post} isMyPost={true} myAcc={myAcc}/> : <Post key={post.id} post={post} isMyPost={false} myAcc={myAcc}/>)
                   )}
       </InfiniteScroll>
     </>

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import UserInfo from '../../../components/userinfo/UserInfo'
-const ProfilePage = () => {
-  
+import { useSelector } from 'react-redux'
+const ProfilePage = () => {  
   return (
     <>
         <div className='main-content'>

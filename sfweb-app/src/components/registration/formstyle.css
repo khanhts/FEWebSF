@@ -83,3 +83,12 @@ input{
 .error-message p{
     color: red;
 }
+/* 
+.btn-forgotpass{
+    margin: 0;
+    padding: 0;
+    color: #646cff; 
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+} */

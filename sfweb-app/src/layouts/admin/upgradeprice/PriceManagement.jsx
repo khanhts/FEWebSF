@@ -5,15 +5,29 @@ import ModalCUPrice from '../../../components/modals/price/ModalCUPrice';
 import './pricemanagement.css'
 import PriceTag from '../../../components/pricetag/PriceTag';
 const PriceManagement = () => {
-    const location = useLocation();
-
     const [prices, setPrices] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [isFocus, setIsFocus] = useState(true);
     const [isCheckedAll, setIsCheckedAll] = useState(false);
+    const [isUncheckedAll, setIsUncheckedAll] = useState(false);
+    const [selectList, setSelectList] = useState([]);
+
+    const handleSelect = (e) => {
+        setSelectList((prevList)=>prevList.concat(e));
+    }
+
+    const handleDeselect = (e) => {
+        setSelectList((prevList)=>prevList.filter(value => value!=e))
+    }
+
+    const showSelectList = () => {
+        console.log("Select list: ",selectList);
+        
+    }
+    
 
     const initPriceList = async() => {
-        const response = await fetchAllPrice(location.state);
+        const response = await fetchAllPrice();
         setPrices(response.data)
     }
 
@@ -35,11 +49,21 @@ const PriceManagement = () => {
     }
 
     const handleCheckAll = () => {
+        setIsUncheckedAll(false);
         setIsCheckedAll(true);
+    }
+
+    const handleCancelCheckAll = () => {
+        setIsCheckedAll(false);
     }
 
     const handleUnCheckAll = () => {
         setIsCheckedAll(false);
+        setIsUncheckedAll(true);
+    }
+
+    const handleCancelUncheckAll = () => {
+        setIsUncheckedAll(false);
     }
 
     useEffect(()=>{
@@ -51,12 +75,13 @@ const PriceManagement = () => {
         {isOpen && <ModalCUPrice    closeModal={closeModalCreatePrice} 
                                     handleMouseHover={handleMouseHover} 
                                     handleMouseLeave={handleMouseLeave} 
-                                    context={"Create new"}
-                                    token={location.state}/>}
+                                    context={"Create new"}/>}
         <div className="left-body">
+            <p>Select: <span>{selectList.length}</span></p>
             <button onClick={()=>openModalCreatePrice()}>Create new price tag</button>
             <button onClick={()=>handleCheckAll()}>Select all price tag</button>
             <button onClick={()=>handleUnCheckAll()}>Unselect all price tag</button>
+            <button onClick={()=>showSelectList()}>Show list</button>
         </div>
         <div className="middle-body">
             {prices && (
@@ -71,7 +96,14 @@ const PriceManagement = () => {
                     </thead>
                     <tbody>
                         {prices.map((priceTag)=>(
-                            <PriceTag key={priceTag.id} priceTag={priceTag} isCheckedAll={isCheckedAll}/>
+                            <PriceTag   key={priceTag.id} 
+                                        priceTag={priceTag} 
+                                        isCheckedAll={isCheckedAll} 
+                                        isUncheckedAll={isUncheckedAll}
+                                        handleCancelCheckAll={handleCancelCheckAll}
+                                        handleCancelUncheckAll={handleCancelUncheckAll}
+                                        handleSelect={handleSelect}
+                                        handleDeselect={handleDeselect}/>
                         ))}
                     </tbody>
                 </table>

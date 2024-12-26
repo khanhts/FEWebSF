@@ -1,5 +1,7 @@
 .navbar-container{
     position:sticky;
+    display: flex;
+    flex-direction: column;
     top:0;
     left: 0;
     width: 110px;
@@ -37,6 +39,7 @@
 }
 
 .nav-item{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,7 +110,10 @@
 
 .bottom-nav-item{
     display: flex;
-    margin: 25px 0px 0px 10px;
+    width: 100%;
+    margin: 1rem 0;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-avatar{
@@ -120,20 +126,97 @@
     border-radius: 50%;
 }
 
+.profile-avatar>img{
+    border-radius: 50%;
+}
+
 .profile-avatar img{
     width: 100%;
     height: 100%;
     padding: 2px;
 }
 
+.profile-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 1rem;
+    margin-left: 0.75rem;
+}
+
 .line{
-    width: 20px;
+    width: 1rem;
     border: 2px solid white;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
 }
 
 .logo-container, .nav-item, .quick-post-container, .profile-avatar, .profile-option{
     cursor: pointer;
+}
+
+.noti-dot{
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: yellow;
+}
+
+@keyframes slideInRight {
+    0%{
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.option-menu{
+    position: absolute;
+    padding: 0.25rem;
+    left: 100%;
+    width: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(122, 5, 5);
+    animation: slideInRight 0.2s ease-in-out;
+}
+
+.option-menu-item{
+    color: white;
+}
+
+.btn-switch{
+    padding: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+}
+
+.btn-logout{
+    padding: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    background-color: transparent;
+    color: red;
+    border: 0;
+    border-top: 1px solid white;
+    border-radius: 0;
+    outline: 0;
 }

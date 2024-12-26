@@ -9,7 +9,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const CreatePost = () => {
     const location = useLocation();
     const myAcc = location.state.myAcc;
-    const accessToken =  location.state.accessToken;
 
     const [content, setContent] = useState('')
     const [images, setImages] = useState([])
@@ -32,7 +31,7 @@ const CreatePost = () => {
 
     const handleCreateFormSubmit = async(e) => {
         e.preventDefault();
-        let response = await createPost(myAcc.id,content,null,null,images,accessToken);
+        let response = await createPost(myAcc.id,content,null,null,images);
         if(response&&response.data.code>=200&&response.data.code<=300)
             navigate('/')
         console.log(response)

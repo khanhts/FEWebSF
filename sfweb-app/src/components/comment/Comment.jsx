@@ -4,7 +4,7 @@ import { customDateParse } from '../../utils/customDateParse';
 import { NavLink } from 'react-router-dom';
 import { deleteComment, updateComment } from '../../services/axios/AxiosComment';
 
-const Comment = ({comment, isMyComment, myAcc, accessToken}) => {
+const Comment = ({comment, isMyComment, myAcc}) => {
     const dialogRef = useRef(null);
 
     const [isShown, setIsShown] = useState(false);
@@ -33,7 +33,7 @@ const Comment = ({comment, isMyComment, myAcc, accessToken}) => {
     }
 
     const handleConfirmDeletePost = async() =>{
-        let response = await deleteComment(comment.id,accessToken)
+        let response = await deleteComment(comment.id)
         dialogRef.current?.close();
         window.location.reload();
     }
@@ -44,7 +44,7 @@ const Comment = ({comment, isMyComment, myAcc, accessToken}) => {
 
     const handleEditFormSubmit = async(e) =>{
         e.preventDefault();
-        const response = await updateComment(comment.id, content, null, accessToken)
+        const response = await updateComment(comment.id, content, null)
         window.location.reload();
     }
     
@@ -61,10 +61,10 @@ const Comment = ({comment, isMyComment, myAcc, accessToken}) => {
             <div className="top-info">
                 <div className="user-info">
                     <img src={IMG_BASE_URL + comment.account.url_avatar} alt="N/A" />
-                    <ul>
-                        <li>{comment.account.fullname}</li>
-                        <li>{customDateParse(comment.created_at)}</li>
-                    </ul>  
+                    <div className='info-text'>
+                        <p>{comment.account.fullname}</p>
+                        <p>{customDateParse(comment.created_at)}</p>
+                    </div>  
                 </div>
                 <div className='option'>
                     <div className={isShown? 'option-icon active': 'option-icon'} 
@@ -73,16 +73,17 @@ const Comment = ({comment, isMyComment, myAcc, accessToken}) => {
                         <div className='dot'></div>
                         <div className='dot'></div>
                     </div>
-                    <div className={isShown? "options-label active":"options-label"}>
+                    {isShown&&
+                    <div className="options-label">
                         {isMyComment?
                         <>
                             <button type='button' className='link-opt-name' onClick={()=>handleEditClicked()}>Edit</button>
                             <button type='button' data-key={comment.id} className='btn-opt-name' onClick={(e)=>handleDeleteClicked(e.target.getAttribute("data-key"))}>Delete</button>
                         </>
                         :
-                        <></>}
-                        <button className='btn-opt-name' >Report</button>
+                        <><button className='btn-opt-name' >Report</button></>}
                     </div>
+                    }
                 </div>
             </div>
             <div className="content">

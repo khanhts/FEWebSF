@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import './adminsignin.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { signInAction } from '../../../redux/actions/adminAction'
+import { getAdminAction, signInAction } from '../../../redux/actions/adminAction'
+import { useAuth } from '../../../services/auth/AuthProvider'
 
 const AdminSignIn = () => {
+
+    const {setToken, setTokenADM}= useAuth();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -29,14 +32,14 @@ const AdminSignIn = () => {
             username: username,
             password: password
         }
-        const response = await dispatch(signInAction(data));
-        console.log("Sign in status: ", response);
-        if(response.signInSuccess){
-            setSigninError(null);
-            navigate("/admin")
-        }
-        else
-            setSigninError(response.message)
+        dispatch(signInAction(data,setTokenADM, navigate)).then((response)=>{
+            if(response.isError)
+                setSigninError(response.message)
+        },(error)=>{
+            setSigninError(error.message);
+        });
+
+            
         setSigningIn(false)
     }
 

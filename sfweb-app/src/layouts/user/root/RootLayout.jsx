@@ -1,23 +1,27 @@
-import { Navigate, Outlet, redirect, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet} from 'react-router-dom'
 import Navbar from '../../../components/navbar/Navbar'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './rootlayout.css'
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { fetchUserAction } from '../../../redux/actions/userAction';
+import React from 'react'
+import ModalAccounts from '../../../components/modals/accounts/ModalAccounts';
+import { useAuth } from '../../../services/auth/AuthProvider';
 
 
 const RootLayout = () => {
-    const auth = useSelector((state)=>state.auth);
-
-    return auth.accessToken!=null?(
+    const {token} = useAuth();
+    const user = useSelector((state)=>state.user);
+    const currentAcc = useSelector((state)=>state.currentAcc);
+    return token!=null? currentAcc.isSignIn?(
         <div className="root-layout">
-            <Navbar/>
-            <Outlet/>    
+            <Navbar account={currentAcc.data}/>
+            <Outlet/>
         </div>
-    ):(
-        <Navigate to="/registration"/>
-    );
+    )
+    :(
+        <ModalAccounts accountList={user.accounts}/>
+    )
+    :(<Navigate to="/registration"/>);
 }
 
 export default RootLayout
